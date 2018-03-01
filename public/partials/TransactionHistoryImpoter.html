@@ -1,0 +1,122 @@
+<div class="container" ng-controller="TransactionHistoryImpoterController">
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titleContract">
+          {{name}}  Shipments</h2>
+    </div>
+    <div class="container col-lg-12" id="divGridImpoter">
+        <form id="formContract">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search Shipments" ng-model="searchContract">
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered table-responsive table-hover">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="col-lg-1 clinicalclass">
+                            <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                                PO Number
+                                <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                        </th>
+                        <th class="col-lg-1 clinicalclass">
+                            <a ng-click="sortTypeC = 'status'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                                Status
+                                <span ng-show="sortTypeC == 'status' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortTypeC == 'status' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                        </th>
+                        <th class="col-lg-2 clinicalclass">
+                            <a ng-click="sortTypeC = 'ShipperName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                                Shipper Name
+                                <span ng-show="sortTypeC == 'ShipperName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortTypeC == 'ShipperName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </th>
+                        <th class="col-lg-2 clinicalclass">
+                            <a ng-click="sortTypeC = 'ShippingCompanyName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                                Shipping Company
+                                <span ng-show="sortTypeC == 'ShippingCompanyName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortTypeC == 'ShippingCompanyName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </th>
+    
+                        <th class="col-lg-3 clinicalclass">
+                            <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                                Transaction Code
+                                <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </th>
+                        <th class="col-lg-1 clinicalclass">
+                            <a ng-click="sortTypeC = 'placeofdilivery'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                                Place of Origin
+                                <span ng-show="sortTypeC == 'placeofdilivery' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortTypeC == 'placeofdilivery' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </th>
+                        <th class="col-lg-1 clinicalclass">Path</th>
+                        <th class="col-lg-1 clinicalclass">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Shipment in shipmentlist | orderBy:sortTypeC:sortReverseC | filter:searchImpoter" style="cursor:pointer;">
+                        <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.ponumber}}</td>
+                        <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.status}}</td>
+                        <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.ShipperName}}</td>
+                        <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.ShippingCompanyName}}</td>
+                        <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.TransactionCode}}</td>
+                        <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.shippercity}}, {{Shipment.shippercountry}}</td>
+                        <td style="padding:4px;text-align: center;vertical-align: middle;">
+                            <a ng-click="ShowPath(Shipment._id)">View Path</a>
+                        </td>
+                        <td style="padding:4px;text-align: center;vertical-align: middle;">
+                            <button ng-disabled="Shipment.status !== 'Shipment Un Loaded'"  class="btn btn-info" ng-click="SeeStatus(Shipment._id)">Status</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+    <div class="container col-lg-12" id="divdashboardreport">
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-1 clinicalclass">                        
+                         Sr. No
+                    </th>
+                    <th class="col-lg-4 clinicalclass">                        
+                        Terms and Conditions Mentioned in Letter of Credit
+                   </th> 
+                   <th class="col-lg-1 clinicalclass">                        
+                    Point Valid?
+               </th>
+           <th class="col-lg-4 clinicalclass">                        
+            Point Violation Justification
+       </th>
+       <th class="col-lg-2 clinicalclass">                        
+        Liable
+   </th>                                                      
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor:pointer;" ng-repeat="BusinessRule in businessrules">
+                    <td style="padding:4px;">{{$index + 1}}</td>
+                    <td style="padding:4px;"><span class="spandashboard">{{BusinessRule.label}}</span></td>    
+                    <td style="padding:4px;text-align: center;">
+                        <i ng-show="BusinessRule.outcome" class="fa fa-check-square fa-2x text-center" aria-hidden="true" ng-style="{ color: BusinessRule.outcome == true ? 'green' : 'red' }"></i>
+                        <i ng-show="!BusinessRule.outcome" class="fa fa-window-close fa-2x text-center" aria-hidden="true" ng-style="{ color: BusinessRule.outcome == true ? 'green' : 'red' }"></i>
+                    </td>
+                    <td style="padding:4px;"><span class="spandashboard">{{BusinessRule.Justification}}</span></td>
+                    <td style="padding:4px;"><span class="spandashboard">{{BusinessRule.liable}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <div class="col-lg-12 text-center">
+       <button ng-click="ClosedashBoard()" class="btn btn-success ">Close</button> </div>
+    </div>
+</div>
+<div class="loading" id="WaitDiv" style="position:absolute;top:30%;left:30%">
+      <div class="loading-spinner-large" style="display: none;"></div>
+      <div class="loading-spinner-small" style="display: none;"></div>
+</div>

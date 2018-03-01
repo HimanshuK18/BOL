@@ -1,0 +1,34 @@
+  <div>
+      <img src="/Images/logo.png"/  style="width:11%;height:8%;margin-left:10px;position:absolute;">
+     </div>
+  <div class="row form-container flip" ng-controller="SigninController">
+    <div style="color:white;margin-top:20%;margin-left:28%;">
+       <i class="fa fa-ship fa-5x mar-bot20" style="margin-bottom: 10px;position:absolute;" ></i></div>
+    
+    <form name="loginform" class="login-form" novalidate>
+      <h3 class="title">Please sign in</h3>
+     
+      <div class="form-group" id="username">
+        <input type="email"    class="form-input" tooltip-class="username-tooltip" placeholder="E-Mail ID" 
+        ng-model="emailid" name="emailid" required  ng-class="{forminputred: loginform.emailid.$invalid}"></input>
+        
+      </div>
+     
+      <div class="form-group" id="password">
+        <input type="password" class="form-input" tooltip-class="password-tooltip" placeholder="Password"  
+        ng-model="password" name="password" required ng-class="{forminputred: loginform.password.$invalid}"></input>
+      </div>
+     
+      <div class="form-group">
+        <button class="login-button" ng-click="LoginClick(loginform)">Login</button>
+        <input class="remember-checkbox"type="checkbox"></input>
+        <p class="remember-p">Remember me</p>
+      </div>
+    </form>
+    <div class="loading" id="WaitDiv" style="position:absolute;top:30%;left:30%">
+      <div class="loading-spinner-large" style="display: none;"></div>
+      <div class="loading-spinner-small" style="display: none;"></div>
+    </div>
+    <script>
+      $("#MiningAppBody").css("background-color", "white");
+    </script>

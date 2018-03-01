@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="/">
+    <title>LOC</title>
+    <!--Important Libraby JS files-->
+    <script src="/lib/jquery3.1.0.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/angular.min.js"></script>
+    <script src="/lib/angular-touch.min.js"></script>
+    <script src="/lib/angular-animate.js"></script>
+    <script src="/lib/angular-route.min.js"></script>
+    <script src="/lib/ui-bootstrap-tpls.js"></script>
+    <script src="/lib/ngStorage.js"></script>
+    <script src="/lib/loading-bar.js"></script>
+    <script src="/lib/socket.io.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtzUZTPvgdqz6jqRIT468B7oFowdC3xX0"></script>
+    <!--Important Style Sheets-->
+    <link rel="stylesheet" href="CSS/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="CSS/LOC.css">
+    <!--Important Clinical Application JS files-->
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/IndexController.js"></script>
+    <script src="/scripts/SigninController.js"></script>
+    <script src="/scripts/TransactionHistoryExpoterController.js"></script>
+    <script src="/scripts/ShippingCompanySendController.js"></script>
+    <script src="/scripts/TransactionHistoryImpoterController.js"></script>
+    <script src="/scripts/ShipmentSendController.js"></script>
+    <script src="/scripts/ShippingController.js"></script>
+    <script src="/scripts/ContractController.js"></script>
+    <script src="/scripts/UserProfileController.js"></script>
+    <script src="/scripts/ReadyToLoadController.js"></script>
+    <script src="/scripts/ReadytoUnloadController.js"></script>    
+    <script src="/scripts/MapController.js"></script>    
+    <script src="/scripts/CreateLOCController.js"></script>
+    
+    
+    <script src="/scripts/TestController.js"></script>
+    
+    
+    <script src="/scripts/services.js"></script>
+</head>
+
+<body ng-app="LOCUseCase" ng-controller="IndexController" id="ClinicalAppBody">
+    <div class="background"></div>
+    <div class="backgroundlayer"></div>
+    <div ng-show="showflag" class="navbar navbar-fixed-top" role="navigation" style="line-height:60px; height:60px;background-color:rgba(10,10,150,.5);">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="fa fa-bars color-white"></span>
+					</button>
+                <h1>
+                    <a class="navbar-brand" href="" style="line-height:50px;" id="flaskLink">
+                        <i class="fa fa-ship fa-1x mar-bot20"></i>
+                    </a>
+                </h1>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-show="viewAdmin"><a href="#/admin"> Admin  |</a></li>
+                    <li ng-show="viewHistory"><a href="#/" id="homelink"> Transaction History   |</a></li>
+                    <li ng-show="viewHistoryO"><a href="#/readytoload" id="homelinkO"> Ready To Load   |</a></li>
+                    <li ng-show="viewUnLoad"><a href="#/readytounload" id="paymentslink"> Ready To Unload  |</a></li>
+                    <li ng-show="viewContract"><a href="#/contract" id="sendshipment"> New Contract  |</a></li>
+                    <li ng-show="viewLOC"><a href="#/loc" id="createloc"> Letter of Credit  |</a></li>
+                    <li ng-show="viewHelp"><a href="#/help">Help |</a></li>
+                    <li ng-show="viewContact"><a href="#/contact"> Contact</a></li>
+                </ul>
+                
+                <ul class="nav navbar-top-links navbar-right">
+                        <span style="color:white;">Welcome, {{name}}</span>
+                        <li class="dropdown" style="cursor:pointer;z-index:10;display:inline-grid;">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user" style="z-index:10;position:fixed;background-color:rgba(5,133,176,.9);">
+                                <li style="cursor:pointer;" ng-click="ShowProfile()" >
+                                    <a style="color:white;"><i class="fa fa-user fa-fw" ></i> User Profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li ng-click="LogoutUser()" style="cursor:pointer;">
+                                    <a style="color:white;"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+            </div>
+        </div>        
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm" >
+              <div class="modal-content" >
+                <div class="modal-header" >
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Alert</h4>
+                </div>
+                <div class="modal-body" >
+                  <p>{{message}}</p>
+                </div>
+                <div class="modal-footer" >
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<div ng-view=""></div>
+</body>
+</html>

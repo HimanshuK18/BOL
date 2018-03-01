@@ -1,0 +1,134 @@
+<div class="container" ng-controller="FabricationShipmentSendController">
+    <div class="col-lg-12" id="DrugLabel">
+        <h2 id="drugTitle" class="page-header topheadline">
+            Enrichment Uranium Stockpile
+        </h2>
+    </div>
+    <div class="container col-lg-12" id="divGridShipmentF">
+        <form id="formDrug">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input class="form-control" type="text" class="form-control" placeholder="Search Stockpile" ng-model="searchDrug">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'PlantName'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Name of Facility
+                            <span ng-show="sortType == 'PlantName' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'PlantName' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'owner'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Owner
+                            <span ng-show="sortType == 'owner' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'owner' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortType = 'postaladdress'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Postal Address
+                            <span ng-show="sortType == 'postaladdress' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'postaladdress' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortType = 'facilitypurpose'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Facility Purpose
+                            <span ng-show="sortType == 'facilitypurpose' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'facilitypurpose' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'status'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Status
+                            <span ng-show="sortType == 'status' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'status' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ShipmentC in shimentlistf | orderBy:sortType:sortReverse | filter:searchDrug">
+                    <td style="padding:4px;">{{ShipmentC.PlantName}}</td>
+                    <td style="padding:4px;">{{ShipmentC.owner}}</td>
+                    <td style="padding:4px;">{{ShipmentC.postaladdress}}</td>
+                    <td style="padding:4px;">{{ShipmentC.facilitypurpose}}</td>                    
+                    <td style="padding:4px;">{{ShipmentC.status}}</td> 
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-hover table-responsive">
+            <tr>
+                <td style="text-align: center">
+                    <button class="btn btn-primary" ng-click="SendShipmentF()">Send Shipment</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-lg-12" id="divShipmentFInput">
+        <form name="shipmentform" action="/createsshipmentfabrication/" method="post" enctype="multipart/form-data">
+            <table id="drugInput" class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td class="col-lg-3">Name of Facility</td>
+                    <td class="col-lg-3">
+                        <select class="form-control" ng-model="ShipmentF.namefacility" name="namefacility" required>
+       <option ng-repeat="optionc in PlantList" value="{{optionc._id}}">{{optionc.organisationname}}</option>
+                        </td>
+                    <td class="col-lg-3">Postal Adddress</td>
+                    <td class="col-lg-3"><textarea rows="4" cols="50" class="form-control" ng-model="ShipmentF.postaladdress" required  name="postaladdress" /></td>
+                </tr>
+                <tr>
+                    <td class="col-lg-3">Country</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="ShipmentF.country" required  name="country"></td>
+                    <td class="col-lg-3">Owner</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="ShipmentF.owner" required type="text" name="owner"/></td>
+                </tr>
+                <tr>
+                    
+                    <td class="col-lg-3">Operator</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="ShipmentF.operator" required type="text" name="operator"/></td>
+                    <td class="col-lg-3">Facility Discription</td>
+                    <td class="col-lg-3"><textarea rows="4" cols="50" class="form-control" ng-model="ShipmentF.facilitydiscription" required type="text" name="facilitydiscription"/></td>
+                </tr>
+                 <tr>
+                    <td class="col-lg-3">Facility Purpose</td>
+                    <td class="col-lg-3"><textarea rows="4" cols="50" class="form-control" ng-model="ShipmentF.facilitypurpose" required type="date" name="facilitypurpose"/></td>
+                    <td>Facility Layout</td>
+                    <td><textarea rows="4" cols="50" class="form-control" ng-model="ShipmentF.facilitylayout" required type="text" name="facilitylayout"/>
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td>Shift Incharge Name</td>
+                    <td><input class="form-control" ng-model="ShipmentF.shiftinchargename" required type="text" name="shiftinchargename"/></td>
+                    <td>Safety Incharge Name</td>
+                    <td><input class="form-control" ng-model="ShipmentF.safetyinchargename" required type="text" name="safetyinchargename"/></td>
+                </tr>
+                 <tr>
+                    
+                     <td>Main Material Discription</td>
+                    <td><textarea rows="4" cols="50" class="form-control" ng-model="Shipment.mainmaterialdiscription" required type="text" name="mainmaterialdiscription"/></td>
+                     <td class="col-lg-3" >Shipment Documents</td>
+                    <td class="col-lg-3"><input class="form-control" multiple name="file" type="file" ng-model="ShipConversion.shipmentfiles" class="form-control" id="UploadFile" required />
+                </tr>
+                  <tr>
+                    
+                </tr>
+                
+            </table>
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-6">
+                        <button type="submit" class="btn btn-success">Send Shipment</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-6">
+                        <button class="btn btn-danger" ng-click="deselectF()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>

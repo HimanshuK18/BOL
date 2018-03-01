@@ -1,0 +1,200 @@
+<div class="container" ng-controller="ShippingController">
+    <div class="col-lg-12" id="ShippingLabel">
+        <h2 id="ShippingTitle" class="page-header topheadline">
+            {{name}} Shipments History
+        </h2>
+    </div>
+    <div class="container col-lg-12" id="divGridShipping">
+    <form id="formShipping">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input class="form-control" type="text" class="form-control" placeholder="Search Shipments" ng-model="searchShipping">
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead class="thead-inverse">
+            <tr>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                        PO Number
+                        <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                        <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </a>
+                </th>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = 'ConsigneeName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                        Consignee Name
+                        <span ng-show="sortTypeC == 'ConsigneeName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                        <span ng-show="sortTypeC == 'ConsigneeName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                </th>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = 'ShipperName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                        Shipper Company
+                        <span ng-show="sortTypeC == 'ShipperName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                        <span ng-show="sortTypeC == 'ShipperName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                </th>
+
+                <th class="col-lg-3 clinicalclass">
+                    <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                        Transaction Code
+                        <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                        <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                </th>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = 'placeofdilivery'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                        Place of Delivery
+                        <span ng-show="sortTypeC == 'placeofdilivery' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                        <span ng-show="sortTypeC == 'placeofdilivery' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                </th>
+                <th class="col-lg-1 clinicalclass" colspan="2">Actions</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr ng-repeat="Shipment in shipmentlist | orderBy:sortTypeC:sortReverseC | filter:searchExpoter" style="cursor:pointer;">
+                    <td style="padding:4px;" ng-click="ShowShipmentSC(Shipment._id)">{{Shipment.ponumber}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSC(Shipment._id)">{{Shipment.ConsigneeName}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSC(Shipment._id)">{{Shipment.ShipperName}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSC(Shipment._id)">{{Shipment.TransactionCode}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSC(Shipment._id)">{{Shipment.consigneecity}}, {{Shipment.consigneecountry}}</td>
+                    <td style="padding:4px;text-align: center;vertical-align: middle;">
+                        <button ng-disabled="Shipment.status != 'Accepted By Shipping Company'" class="btn btn-info" ng-click="CreateShipmentShippingCompamy(Shipment._id)">Send</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<div id='DetailsShipemtSC'  class="container col-lg-12">
+   
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+            <span class="labelstyle">PO Number</span>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <span ng-class="ShipmentDetails.ponumber == ShipmentDetailsB.ponumber ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                name="_id" id="_id" ng-bind="ShipmentDetails.ponumber">
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+            <span class="labelstyle">Notifying Party</span>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <span ng-class="ShipmentDetails.notifyingparty == ShipmentDetailsB.notifyingparty ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                name="ExporterName" id="ExporterName" ng-bind="ShipmentDetails.notifyingparty">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+            <span class="labelstyle">Order Number</span>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <span ng-class="ShipmentDetails.ordernumber == ShipmentDetailsB.ordernumber ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                name="goods" id="goods" ng-bind="ShipmentDetails.ordernumber">
+        </div>
+
+    </div>
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+            <span class="labelstyle">Hand Over Shipping Date</span>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <span ng-class="ShipmentDetails.handovershippingdate == ShipmentDetailsB.handovershippingdate ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                name="goodsquantity" id="goodsquantity" ng-bind="ShipmentDetails.handovershippingdate">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+            <span class="labelstyle">Status</span>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <span ng-class="ShipmentDetails.status == ShipmentDetailsB.status ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                name="status" id="status" ng-bind="ShipmentDetails.status">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+            <span class="labelstyle">Shipping Company Name</span>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <span ng-class="ShipmentDetails.ShippingCompanyName == ShipmentDetailsB.ShippingCompanyName ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                name="dateofcontract" id="dateofcontract" ng-bind="ShipmentDetails.ShippingCompanyName">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+            <span class="labelstyle">Consignee Name</span>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <span ng-class="ShipmentDetails.ConsigneeName == ShipmentDetailsB.ConsigneeName ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                name="dateofshipment" id="dateofshipment" ng-bind="ShipmentDetails.ConsigneeName">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-12 col-md-12" style="padding-top:5px;margin-left:40%;">
+            <span class="labelstyle">
+                <strong>Consignment Details</strong>
+            </span>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+        <div class="col-lg-12 col-md-12" style="padding-top:5px;">
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-lg-2 col-md-2 clinicalclass">
+                            Unit
+                        </th>
+                        <th class="col-lg-1 col-md-1 clinicalclass">
+                            Type
+                        </th>
+                        <th class="col-lg-1 col-md-1 clinicalclass">
+                            Hazardous
+                        </th>
+                        <th class="col-lg-2 col-md-2 clinicalclass">
+                            RFID Code
+                        </th>
+                        <th class="col-lg-5 col-md-5 clinicalclass">
+                            Description
+                        </th>
+                        <th class="col-lg-1 col-md-1 clinicalclass">
+                            Weight (Kg)
+                        </th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="Consignment in ShipmentDetails.consignmentData">
+                    <td style="padding:2px;">
+                        {{Consignment.unit}}
+                    </td>
+                    <td style="padding:2px;">
+                        {{Consignment.type}}
+                    </td>
+                    <td style="padding:2px;">
+                        {{Consignment.hazardousmaterial}}
+                    </td>
+                    <td style="padding:2px;">
+                        {{Consignment.rfid}}
+                    </td>
+                    <td style="padding:2px;">
+                        {{Consignment.description}}
+                    </td>
+                    <td style="padding:2px;">
+                        {{Consignment.weight}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <form name="ExpoterForm">
+        <div class="col-lg-12 col-md-12" style="margin-bottom:2%">
+                <button class="btn btn-success btn-md" ng-click="AcceptS()" style="margin-top:2%;margin-left:35%;" style="padding-left:5px;padding-right:5px;"
+                formnovalidate>Accept</button>
+            <button class="btn btn-info btn-md" ng-click="CloseS()" style="margin-top:2%;margin-left:15%;" style="padding-left:5px;padding-right:5px;"
+                formnovalidate>Close</button>
+        </div>
+    </form>
+
+</div>

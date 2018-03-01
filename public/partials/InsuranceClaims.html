@@ -1,0 +1,226 @@
+<div class="container" ng-controller="InsuranceClaimsController">
+    <div class="col-lg-12" id="CustomsLabel">
+        <h2 id="CustomsTitle" class="page-header topheadline">
+            {{name}} Claims History
+        </h2>
+    </div>
+   <div class="container col-lg-12" id="divGridInsurance">
+    <form id="formCustoms">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input class="form-control" type="text" class="form-control" placeholder="Search Transactions" ng-model="searchCustoms">
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead class="thead-inverse">
+            <tr>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = '_id'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Contract ID
+                            <span ng-show="sortTypeC == '_id' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == '_id' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                </th>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = 'goods'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Good Details
+                            <span ng-show="sortTypeC == 'goods' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'goods' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ExporterName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Exporter Name
+                            <span ng-show="sortTypeC == 'ExporterName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ExporterName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ImporterName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Importer Name
+                            <span ng-show="sortTypeC == 'ImporterName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ImporterName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'placeofshippment'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Place of Shipment
+                            <span ng-show="sortTypeC == 'placeofshippment' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'placeofshippment' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'placeofdilivery'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Place of Delivery
+                            <span ng-show="sortTypeC == 'placeofdilivery' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'placeofdilivery' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                       
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ContractC in contractlistclaims | orderBy:sortTypeC:sortReverseC | filter:searchCustoms" style="cursor:pointer;">
+                    <td style="padding:4px;" ng-click="ShowContractI(ContractC._id)">{{ContractC._id}}</td>
+                    <td style="padding:4px;" ng-click="ShowContractI(ContractC._id)">{{ContractC.goods}}</td>
+                    <td style="padding:4px;" ng-click="ShowContractI(ContractC._id)">{{ContractC.ExporterName}}</td>
+                    <td style="padding:4px;" ng-click="ShowContractI(ContractC._id)">{{ContractC.ImporterName}}</td>
+                    <td style="padding:4px;" ng-click="ShowContractI(ContractC._id)">{{ContractC.placeofshippment}}</td>
+                    <td style="padding:4px;" ng-click="ShowContractI(ContractC._id)">{{ContractC.placeofdilivery}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id='DetailsContractI'  class="container col-lg-12">
+   
+    <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">ContractC ID</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC._id == ContractDetailsBIC.id ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"  name="_id" id="_id" ng-bind="ContractDetailsIC._id" >
+            </div>
+        </div>     
+
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Expoter Name</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.expoter == ContractDetailsBIC.expoter ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="ExporterName" id="ExporterName" ng-bind="ContractDetailsIC.ExporterName" >
+           </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Goods Details</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.goods == ContractDetailsBIC.goods ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="goods" id="goods" ng-bind="ContractDetailsIC.goods" >
+            </div>
+                
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Goods Quantity</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.goodsquantity == ContractDetailsBIC.goodsquantity ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="goodsquantity" id="goodsquantity" ng-bind="ContractDetailsIC.goodsquantity" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Status</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.shipperstatus == ContractDetailsBIC.shipperstatus ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="status" id="status" ng-bind="ContractDetailsIC.status" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Date of ContractC</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.dateofcontract == ContractDetailsBIC.dateofcontract ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="dateofcontract" id="dateofcontract" ng-bind="ContractDetailsIC.dateofcontract" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Date of Shipment</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.dateofshipment == ContractDetailsBIC.dateofshipment ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="dateofshipment" id="dateofshipment" ng-bind="ContractDetailsIC.dateofshipment" >
+            </div>
+        </div>
+       <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Place of Shipment</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.placeofshippment == ContractDetailsBIC.placeofshippment ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="placeofshippment" id="placeofshippment" ng-bind="ContractDetailsIC.placeofshippment" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Cost of Goods (USD)</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.costofgoods == ContractDetailsBIC.costofgoods ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="costofgoods" id="costofgoods" ng-bind="ContractDetailsIC.costofgoods" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Date of Delivery</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.dateofdilivery == ContractDetailsBIC.dateofdilivery ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="dateoddilivery" id="dateoddilivery" ng-bind="ContractDetailsIC.dateofdilivery" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Place of Delivery</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.placeofdilivery == ContractDetailsBIC.placeofdilivery ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="placeofdilivery" id="placeofdilivery" ng-bind="ContractDetailsIC.placeofdilivery" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Customs Name</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.customs == ContractDetailsBIC.customs ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="CustomsName" id="CustomsName" ng-bind="ContractDetailsIC.CustomsName" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Insurance Name</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.insurance == ContractDetailsBIC.insurance ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="InsuranceName" id="InsuranceName" ng-bind="ContractDetailsIC.InsuranceName" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Shipper Name</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ContractDetailsIC.shipper == ContractDetailsBIC.shipper ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'" name="ShipperName" id="ShipperName" ng-bind="ContractDetailsIC.ShipperName" >
+            </div>
+        </div>
+        
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Importer Comment</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span class="form-control labelstylevalue" name="importercomment" id="importercomment" ng-bind="ContractDetailsIC.importercomment" >
+            </div>
+        </div>
+        <form name="CustomsForm">
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;"><span class="labelstyle">Claim Comments</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <textarea rows="3" style="margin:3px;" cols="50" class="form-control" ng-model="ContractDetailsIC.insuranceclaimcomment" required type="text" name="insuranceclaimcomment"/>
+            </div>
+        </div>
+         <div class="col-lg-12 col-md-12" style="margin-bottom:2%">            
+            <button class="btn btn-success btn-md" ng-click="ActionIC(ContractDetailsIC._id,'Approved',CustomsForm)" 
+            style="margin-top:2%;margin-left:25%;" style="padding-left:5px;padding-right:5px;">Approve Claim</button>
+            <button class="btn btn-danger btn-md" ng-click="ActionIC(ContractDetailsIC._id,'Rejected',CustomsForm)" 
+            style="margin-top:2%;margin-left:10%;" style="padding-left:5px;padding-right:5px;">Reject Claim</button>
+            <button class="btn btn-info btn-md" ng-click="CloseI()" 
+            style="margin-top:2%;margin-left:10%;" style="padding-left:5px;padding-right:5px;" formnovalidate>Close</button>
+        </div>
+        </form>
+      <div class="statusdiv">
+          <table class="table table-bordered table-responsive table-hover">
+              <thead class="thead-inverse">
+               <tr>
+                    <th class="col-lg-2 clinicalclass" colspan="2">
+                        Approvals</th>
+              <tr>
+                <tr>
+                  <td ><i ng-class="ContractDetailsIC.expoterstatus == 'Approved'  ? 'fa fa-thumbs-o-up fa-2x' : ContractDetailsIC.expoterstatus == 'Rejected' ? 'fa fa-thumbs-o-down fa-2x' : ContractDetailsIC.expoterstatus == 'Pending' ?'fa fa-clock-o fa-2x' :'fa fa-clock-o fa-2x'"
+                         ng-style="{ color: ContractDetailsIC.expoterstatus == 'Approved'  ? 'green': ContractDetailsIC.expoterstatus == 'Rejected' ? 'red' : ContractDetailsIC.expoterstatus == 'Pending' ? 'orange' : 'orange'}" aria-hidden="true"></i></td>
+                  <td  style="border-left:1px solid white;">Expoter</td>
+              </tr>
+                <tr>
+                  <td ><i ng-class="ContractDetailsIC.shipperstatus == 'Approved'  ? 'fa fa-thumbs-o-up fa-2x' : ContractDetailsIC.shipperstatus == 'Rejected' ? 'fa fa-thumbs-o-down fa-2x' : ContractDetailsIC.shipperstatus == 'Pending' ?'fa fa-clock-o fa-2x' :'fa fa-clock-o fa-2x'"
+                         ng-style="{ color: ContractDetailsIC.shipperstatus == 'Approved'  ? 'green': ContractDetailsIC.shipperstatus == 'Rejected' ? 'red' : ContractDetailsIC.shipperstatus == 'Pending' ? 'orange' : 'orange'}" aria-hidden="true"></i></td>
+                  <td  style="border-left:1px solid white;">Shipper</td>
+              </tr>
+                <tr>
+                  <td ><i ng-class="ContractDetailsIC.customsdestinationstatus == 'Approved'  ? 'fa fa-thumbs-o-up fa-2x' : ContractDetailsIC.customsdestinationstatus == 'Rejected' ? 'fa fa-thumbs-o-down fa-2x' : ContractDetailsIC.customsdestinationstatus == 'Pending' ?'fa fa-clock-o fa-2x' :'fa fa-clock-o fa-2x'"
+                         ng-style="{ color: ContractDetailsIC.customsdestinationstatus == 'Approved'  ? 'green': ContractDetailsIC.customsdestinationstatus == 'Rejected' ? 'red' : ContractDetailsIC.customsdestinationstatus == 'Pending' ? 'orange' : 'orange'}" aria-hidden="true"></i></td>
+                  <td  style="border-left:1px solid white;">Exporter Port</td>
+              </tr>
+                <tr>
+                  <td ><i ng-class="ContractDetails.customsdestinationstatus == 'Approved'  ? 'fa fa-thumbs-o-up fa-2x' : ContractDetails.customsdestinationstatus == 'Rejected' ? 'fa fa-thumbs-o-down fa-2x' : ContractDetails.customsdestinationstatus == 'Pending' ?'fa fa-clock-o fa-2x' :'fa fa-clock-o fa-2x'"
+                         ng-style="{ color: ContractDetails.customsdestinationstatus == 'Approved'  ? 'green': ContractDetails.customsdestinationstatus == 'Rejected' ? 'red' : ContractDetails.customsdestinationstatus == 'Pending' ? 'orange' : 'orange'}" aria-hidden="true"></i></td>
+                  <td  style="border-left:1px solid white;">Importer Port</td>
+              </tr>
+                <tr>
+                  <td ><i ng-class="ContractDetailsIC.insurancestatus == 'Approved'  ? 'fa fa-thumbs-o-up fa-2x' : ContractDetailsIC.insurancestatus == 'Rejected' ? 'fa fa-thumbs-o-down fa-2x' : ContractDetailsIC.insurancestatus == 'Pending' ?'fa fa-clock-o fa-2x' :'fa fa-clock-o fa-2x'"
+                         ng-style="{ color: ContractDetailsIC.insurancestatus == 'Approved'  ? 'green': ContractDetailsIC.insurancestatus == 'Rejected' ? 'red' : ContractDetailsIC.insurancestatus == 'Pending' ? 'orange' : 'orange'}" aria-hidden="true"></i></td>
+                  <td  style="border-left:1px solid white;">Insurance</td>
+              </tr>
+                <tr>
+                  <td>
+                      <i ng-class="ContractDetailsIC.importerstatus == 'Approved'  ? 'fa fa-thumbs-o-up fa-2x' : ContractDetailsIC.importerstatus == 'Rejected' ? 'fa fa-thumbs-o-down fa-2x' : ContractDetailsIC.importerstatus == 'Pending' ?'fa fa-clock-o fa-2x' :'fa fa-clock-o fa-2x'"
+                         ng-style="{ color: ContractDetailsIC.importerstatus == 'Approved'  ? 'green': ContractDetailsIC.importerstatus == 'Rejected' ? 'red' : ContractDetailsIC.importerstatus == 'Pending' ? 'orange' : 'orange'}" aria-hidden="true"></i>
+                </td>
+                  <td  style="border-left:1px solid white;">Importer</td>
+              </tr>
+          </table>
+       </div>  
+
+</div>
+</div>

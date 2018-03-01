@@ -1,0 +1,157 @@
+<div class="container" ng-controller="ConversionShipmentSendController">
+    <div class="col-lg-12" id="DrugLabel">
+        <h2 id="drugTitle" class="page-header topheadline">
+            Enrichment Uranium Stockpile
+        </h2>
+    </div>
+    <div class="container col-lg-12" id="divGridShipment">
+        <form id="formDrug">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input class="form-control" type="text" class="form-control" placeholder="Search Stockpile" ng-model="searchDrug">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'productname'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Product Name
+                            <span ng-show="sortType == 'productname' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'productname' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'lotnumber'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Lot Number
+                            <span ng-show="sortType == 'lotnumber' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'lotnumber' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'consignee'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Consignee
+                            <span ng-show="sortType == 'consignee' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'consignee' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'contractnumber'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Contract Number
+                            <span ng-show="sortType == 'contractnumber' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'contractnumber' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'dateshipment'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Date of Shipment
+                            <span ng-show="sortType == 'dateshipment' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'dateshipment' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'status'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Status
+                            <span ng-show="sortType == 'status' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'status' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ShipmentC in shimentlist | orderBy:sortType:sortReverse | filter:searchDrug">
+                    <td style="padding:4px;">{{ShipmentC.productname}}</td>
+                    <td style="padding:4px;">{{ShipmentC.lotnumber}}</td>
+                    <td style="padding:4px;">{{ShipmentC.consignee}}</td>
+                    <td style="padding:4px;">{{ShipmentC.contractnumber}}</td>
+                    <td style="padding:4px;">{{ShipmentC.dateshipment}}</td>
+                    <td style="padding:4px;">{{ShipmentC.status}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-hover table-responsive">
+            <tr>
+                <td style="text-align: center">
+                    <button class="btn btn-primary" ng-click="addShipment()">Send Shipment</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-lg-12" id="divShipmentInput">
+        <form name="shipmentform" action="/saveshipmentfabrication/" method="post" enctype="multipart/form-data">
+            <table id="drugInput" class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td class="col-lg-3">Product Name</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.productname" name="productname" required></td>
+                    <td class="col-lg-3">Lot Number</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.lotnumber" required  name="lotnumber"></td>
+                </tr>
+                <tr>
+                    <td class="col-lg-3">Number of Cylinder </td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.cylindernumber" required  name="cylindernumber"></td>
+                    <td class="col-lg-3">Weight/Cylinder (Kgs)</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.weight" required type="number" name="weight" />
+                </tr>
+                <tr>
+                    <td class="col-lg-3">Packaging Date</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.packagingdate" required type="date" name="packagingdate"/></td>
+                    <td class="col-lg-3">Cylinder Package Certification Report</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.drumpackagecertificationreport" required type="text" name="drumpackagecertificationreport"/></td>
+                </tr>
+                 <tr>
+                    <td class="col-lg-3">Inspected By</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.inspectedby" required type="text" name="inspectedby"/></td>
+                    <td class="col-lg-3">Inspected Date</td>
+                    <td class="col-lg-3"><input class="form-control" ng-model="Shipment.inspecteddate" required type="date" name="inspecteddate"/></td>
+                </tr>
+
+                 <tr>
+                    <td>Consignee</td>
+                    <td><select class="form-control" ng-model="ShipConversion.consignee" name="consignee" required>
+       <option ng-repeat="optionc in FabricationList" value="{{optionc._id}}">{{optionc.organisationname}}</option></td>
+                     <td>Logistics Service Provider</td>
+                    <td><input class="form-control" ng-model="Shipment.logisticsserviceprovide" required type="text" name="logisticsserviceprovide"/></td>
+                </tr>
+                 <tr>
+                    <td>Dangerous Goods Declaration Form</td>
+                    <td><input class="form-control" ng-model="Shipment.dangerousgoodsdeclarationform" required type="text" name="dangerousgoodsdeclarationform"/></td>
+                     <td>Container Number</td>
+                    <td><input class="form-control" ng-model="Shipment.containernumber" required type="text" name="containernumber"/></td>
+                </tr>
+                 <tr>
+                    <td>Container Certificate of Inspection</td>
+                    <td><input class="form-control" ng-model="Shipment.containercertificateinspection" required type="text" name="containercertificateinspection"/></td>
+                     <td>Shipment Number</td>
+                    <td><input class="form-control" ng-model="Shipment.shipmentnumber" required type="text" name="shipmentnumber"/></td>
+                </tr>
+                <tr>
+                    <td>Date Of Shipment</td>
+                    <td><input class="form-control" ng-model="Shipment.dateshipment" required type="date" name="dateshipment"/></td>
+                     <td>Contract Number</td>
+                    <td><input class="form-control" ng-model="Shipment.contractnumber" required type="text" name="contractnumber"/></td>
+                </tr>
+                <tr>
+                    <td>Shipment Notification Document Number</td>
+                    <td><input class="form-control" ng-model="Shipment.shipmentnotificationdocumentnumber" required type="text" name="shipmentnotificationdocumentnumber"/></td>
+                     <td>Export License Number</td>
+                    <td><input class="form-control" ng-model="Shipment.exportlicensnumber" required type="text" name="exportlicensnumber"/></td>
+                </tr>
+                  <tr>
+                    <td>ISO Certificate Number for International Logistics of Radioactive & Nuclear Materials</td>
+                    <td><input class="form-control" ng-model="Shipment.ISOcertificatenumberforinternationallogistics" required type="text" name="ISOcertificatenumberforinternationallogistics"/></td>
+                     <td class="col-lg-3">Shipment Documents</td>
+                    <td><input class="form-control" multiple name="file" type="file" ng-model="ShipConversion.shipmentfiles" class="form-control" id="UploadFile" required />
+                </tr>
+                
+            </table>
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-6">
+                        <button type="submit" class="btn btn-success">Send Shipment</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-6">
+                        <button class="btn btn-danger" ng-click="deselect()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>

@@ -1,0 +1,127 @@
+<div class="container" ng-controller="CreateLOCController">
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titlefabrication">
+            Letter of Credit Creation</h2>
+    </div>
+    <div class="container col-lg-12" id="divGridLOC">
+        <form id="formLOC">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <input class="form-control" type="text" class="form-control" placeholder="Search Letter of Credit" ng-model="searchLOC">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-4 clinicalclass">
+                        <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Port Of Loading
+                            <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-4 clinicalclass">
+                        <a ng-click="sortTypeC = 'ConsigneeName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Port Of Destination
+                            <span ng-show="sortTypeC == 'ConsigneeName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ConsigneeName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-4 clinicalclass">
+                        <a ng-click="sortTypeC = 'ShippingCompanyName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Date of Shipment
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Shipment in shipmentlist | orderBy:sortTypeC:sortReverseC | filter:searchLOC" style="cursor:pointer;">
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.ponumber}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.ConsigneeName}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.ShippingCompanyName}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col-lg-12 col-md-12" style="margin-bottom:2%">
+            <button class="btn btn-success btn-md" ng-click="CreateLOC()" style="margin-top:2%;margin-left:45%;" style="padding-left:5px;padding-right:5px;"
+            formnovalidate>Create</button>
+    </div>
+    
+</div>
+<div id='divLOCDetails' class="container col-lg-12" >
+        <form id="loccreateform">
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <td class="col-lg-6">Bill of Lading should be issued by Shipping Company</td>
+                <td class="col-lg-6">
+                 <span>"CLEAN"</span>
+                </td>
+                <tr>
+                <td class="col-lg-6">Final Status of Bill of Lading </td>
+                <td class="col-lg-6">
+                        <span>Shipped Onboard Bill of Lading"</span>
+                </td>
+            </tr>
+            <tr>
+                    <td class="col-lg-6">Integrity of Container - Same RFID of a Container at all three GPS Coordinates </td>
+                    <td class="col-lg-6">
+                            <ul>
+                                    <li>Place of Receipt</li>
+                                    <li>Port of Loading</li>
+                                    <li>Port of Discharge</li>
+                                  </ul>  
+                    </td>
+                </tr>
+                <tr>
+                        <td class="col-lg-6">Condition and Integrity of Handling Units 
+                            </td>
+                        <td class="col-lg-6">
+                                <ul>
+                                        <li> Units Count same at three Key location
+                                            <ul>
+                                                    <li>Place of Receipt</li>
+                                                    <li>Port of Loading</li>
+                                                    <li>Port of Discharge</li>
+                                            </ul>
+                                        </li>
+                                        <li>Handling Units should be in good condition when unloaded at destination port</li>
+                                        
+                                      </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                            <td class="col-lg-6">Port of Loading </td>
+                            <td class="col-lg-6">
+                                    <select  class="form-control" ng-model="loc.portofloading" name="portofloading" required>
+                                     <option ng-repeat="port in portslist" value="{{port.portname}}">{{port.portname}}</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                                <td class="col-lg-6">Port of Destination</td>
+                                <td class="col-lg-6">
+                                        <select  class="form-control" ng-model="loc.portofdestination" name="portofdestination" required>
+                                                <option ng-repeat="port in portslist" value="{{port.portname}}">{{port.portname}}</option></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                    <td class="col-lg-6">Name of Consignee </td>
+                                    <td class="col-lg-6">
+                                            <span>{{name}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td class="col-lg-6">Last Date of Shipment</td>
+                                        <td class="col-lg-6">
+                <input class="form-control" ng-model="loc.lastdateofshipment" required type="date" name="lastdateofshipment" />
+                                        </td>
+                                    </tr>
+        </table>
+        <button class="btn btn-success btn-md" ng-click="SaveLOC()" style="margin-top:2%;margin-left:45%;" style="padding-left:5px;padding-right:5px;">Create LOC</button>
+    </form>
+    </div>
+</div>

@@ -1,0 +1,424 @@
+<div class="container" ng-controller="ReadytoUnloadController">
+    <div class="col-lg-12" id="CustomsLabel">
+        <h2 id="CustomsTitle" class="page-header topheadline">
+            {{name}} Shipment Loading History
+        </h2>
+    </div>
+   <div class="container col-lg-12" id="divGridShipmentsUnLoad">
+    <form name="formCustoms">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input class="form-control" type="text" class="form-control" placeholder="Search Transactions" ng-model="searchCustoms">
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead class="thead-inverse">
+            <tr>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                        PO Number
+                            <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                </th>
+                <th class="col-lg-2 clinicalclass">
+                    <a ng-click="sortTypeC = 'ConsigneeName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                        Consignee Name
+                            <span ng-show="sortTypeC == 'ConsigneeName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ConsigneeName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ShipperName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Shipper Name
+                            <span ng-show="sortTypeC == 'ShipperName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ShipperName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Transaction Code
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'consigneecity'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Place of Dilivery
+                            <span ng-show="sortTypeC == 'consigneecity' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'consigneecity' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-1 clinicalclass">
+                        <a ng-click="sortTypeC = 'placeofshippment'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Action
+                            <span ng-show="sortTypeC == 'placeofshippment' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'placeofshippment' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                       
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ShipmentSCL in shipmentlistsc | orderBy:sortTypeC:sortReverseC | filter:searchCustoms" style="cursor:pointer;">
+                    <td style="padding:4px;" ng-click="ShowShipmentSCUnloadData(ShipmentSCL._id)">{{ShipmentSCL.ponumber}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSCUnloadData(ShipmentSCL._id)">{{ShipmentSCL.ConsigneeName}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSCUnloadData(ShipmentSCL._id)">{{ShipmentSCL.ShipperName}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSCUnloadData(ShipmentSCL._id)">{{ShipmentSCL.TransactionCode}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentSCUnloadData(ShipmentSCL._id)">{{ShipmentSCL.consigneecity}}, {{ShipmentSCL.consigneecountry}}</td>
+                    <td style="padding:4px;text-align: center;vertical-align: middle;">
+                        <button ng-disabled="ShipmentSCL.status != 'Shipment Loaded'" class="btn btn-info" ng-click="UnLoadConsigment(ShipmentSCL._id)">Un Load</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id='DetailsShipemtSCLUnload'  class="container col-lg-12">
+        
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                 <span class="labelstyle">PO Number</span>
+             </div>
+             <div class="col-lg-8 col-md-8">
+                 <span ng-class="ShipmentDetails.ponumber == ShipmentDetailsB.ponumber ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                     name="_id" id="_id" ng-bind="ShipmentDetails.ponumber">
+             </div>
+         </div>
+     
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                 <span class="labelstyle">Notifying Party</span>
+             </div>
+             <div class="col-lg-8 col-md-8">
+                 <span ng-class="ShipmentDetails.notifyingparty == ShipmentDetailsB.notifyingparty ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                     name="ExporterName" id="ExporterName" ng-bind="ShipmentDetails.notifyingparty">
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                 <span class="labelstyle">Order Number</span>
+             </div>
+             <div class="col-lg-8 col-md-8">
+                 <span ng-class="ShipmentDetails.ordernumber == ShipmentDetailsB.ordernumber ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                     name="goods" id="goods" ng-bind="ShipmentDetails.ordernumber">
+             </div>
+     
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                 <span class="labelstyle">Hand Over Shipping Date</span>
+             </div>
+             <div class="col-lg-8 col-md-8">
+                 <span ng-class="ShipmentDetails.handovershippingdate == ShipmentDetailsB.handovershippingdate ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                     name="goodsquantity" id="goodsquantity" ng-bind="ShipmentDetails.handovershippingdate">
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                 <span class="labelstyle">Status</span>
+             </div>
+             <div class="col-lg-8 col-md-8">
+                 <span ng-class="ShipmentDetails.status == ShipmentDetailsB.status ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                     name="status" id="status" ng-bind="ShipmentDetails.status">
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                 <span class="labelstyle">Shipping Company Name</span>
+             </div>
+             <div class="col-lg-8 col-md-8">
+                 <span ng-class="ShipmentDetails.ShippingCompanyName == ShipmentDetailsB.ShippingCompanyName ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                     name="dateofcontract" id="dateofcontract" ng-bind="ShipmentDetails.ShippingCompanyName">
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                 <span class="labelstyle">Consignee Name</span>
+             </div>
+             <div class="col-lg-8 col-md-8">
+                 <span ng-class="ShipmentDetails.ConsigneeName == ShipmentDetailsB.ConsigneeName ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                     name="dateofshipment" id="dateofshipment" ng-bind="ShipmentDetails.ConsigneeName">
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-12 col-md-12" style="padding-top:5px;margin-left:40%;">
+                 <span class="labelstyle">
+                     <strong>Consignment Details</strong>
+                 </span>
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+             <div class="col-lg-12 col-md-12" style="padding-top:5px;">
+                 <table class="table table-bordered table-responsive table-hover">
+                     <thead>
+                         <tr>
+                             <th class="col-lg-2 col-md-2 clinicalclass">
+                                 Unit
+                             </th>
+                             <th class="col-lg-1 col-md-1 clinicalclass">
+                                 Type
+                             </th>
+                             <th class="col-lg-1 col-md-1 clinicalclass">
+                                 Hazardous
+                             </th>
+                             <th class="col-lg-2 col-md-2 clinicalclass">
+                                 RFID Code
+                             </th>
+                             <th class="col-lg-5 col-md-5 clinicalclass">
+                                 Description
+                             </th>
+                             <th class="col-lg-1 col-md-1 clinicalclass">
+                                 Weight (Kg)
+                             </th>
+                         </tr>
+                     </thead>
+                     <tr ng-repeat="Consignment in ShipmentDetails.consignmentData">
+                         <td style="padding:2px;">
+                             {{Consignment.unit}}
+                         </td>
+                         <td style="padding:2px;">
+                             {{Consignment.type}}
+                         </td>
+                         <td style="padding:2px;">
+                             {{Consignment.hazardousmaterial}}
+                         </td>
+                         <td style="padding:2px;">
+                             {{Consignment.rfid}}
+                         </td>
+                         <td style="padding:2px;">
+                             {{Consignment.description}}
+                         </td>
+                         <td style="padding:2px;">
+                             {{Consignment.weight}}
+                         </td>
+                     </tr>
+                 </table>
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Goods Recived On</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.receivedgoodsondate == ShipmentDetailsB.receivedgoodsondate ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="receivedgoodsondate" ng-bind="ShipmentDetails.receivedgoodsondate">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Bill of Lading Number</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.billofladingno == ShipmentDetailsB.billofladingno ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="billofladingno" ng-bind="ShipmentDetails.billofladingno">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Carrier SCAC</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.carrierscac == ShipmentDetailsB.carrierscac ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="carrierscac" ng-bind="ShipmentDetails.carrierscac">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Carrier Name</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.carriername == ShipmentDetailsB.carriername ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="carriername" ng-bind="ShipmentDetails.carriername">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Ocean Vessel Name</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.oceanvesselname == ShipmentDetailsB.oceanvesselname ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="oceanvesselname" ng-bind="ShipmentDetails.oceanvesselname">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Place of Receipt</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.placeofreceipt == ShipmentDetailsB.placeofreceipt ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="placeofreceipt" ng-bind="ShipmentDetails.placeofreceipt">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Port of Discharge</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.portofdischarge == ShipmentDetailsB.portofdischarge ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="portofdischarge" ng-bind="ShipmentDetails.portofdischarge">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">BOL Issued</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.bolissued == ShipmentDetailsB.bolissued ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="bolissued" ng-bind="ShipmentDetails.bolissued">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Port of Loading</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.portofloading == ShipmentDetailsB.portofloading ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="portofloading" ng-bind="ShipmentDetails.portofloading">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Expected Date of Loading</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.expecteddateofloading == ShipmentDetailsB.expecteddateofloading ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="expecteddateofloading" ng-bind="ShipmentDetails.expecteddateofloading">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Container RFID</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.containerfid == ShipmentDetailsB.containerfid ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="containerfid" ng-bind="ShipmentDetails.containerfid">
+            </div>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Container ID</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.containerid == ShipmentDetailsB.containerid ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="containerid" ng-bind="ShipmentDetails.containerid">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Loaded at Port</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.loadedatport == ShipmentDetailsB.loadedatport ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="loadedatport" ng-bind="ShipmentDetails.loadedatport">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Loading Date</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.loadingdate == ShipmentDetailsB.loadingdate ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="loadingdate" ng-bind="ShipmentDetails.loadingdate">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebgcontract">
+            <div class="col-lg-4 col-md-4" style="padding-top:5px;">
+                <span class="labelstyle">Ship Master Name</span>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <span ng-class="ShipmentDetails.shipmastername == ShipmentDetailsB.shipmastername ? 'form-control labelstylevalue' : 'form-control labelstylevalueb'"
+                    name="dateofshipment" id="shipmastername" ng-bind="ShipmentDetails.shipmastername">
+            </div>
+        </div>
+
+
+
+
+
+
+             <div class="col-lg-12 col-md-12" style="margin-bottom:2%">
+                 <button class="btn btn-info btn-md" ng-click="CloseUnLoad()" style="margin-top:2%;margin-left:45%;" style="padding-left:5px;padding-right:5px;"
+                     formnovalidate>Close</button>
+             </div>
+     </div>
+
+     <div id='divfillformUnload'>
+         <form name="Unloadform">
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <td class="col-lg-3">Port Of Discharge (GPS Coordinates):</td>
+                <td class="col-lg-3">
+                    <input type="text" class="form-control" ng-model="unloadshipmentdetails.portofdischargegps" required name="portofdischarge">
+                </td>
+                <td class="col-lg-3">Date of Arrival:</td>
+                <td class="col-lg-3">
+                    <input type="date" class="form-control" ng-model="unloadshipmentdetails.dateofarrivalunload" required name="dateofarrival">
+                </td>
+            </tr>
+            <tr>
+                <td class="col-lg-3" colspan="2">Container RFID:</td>
+                <td class="col-lg-3" colspan="2">
+                    <input type="text" class="form-control" ng-model="unloadshipmentdetails.containerrfidunload" required name="loadedatport">
+                </td>
+            </tr> </table>
+<div style="color:white;margin-top:10px;text-align: center;"><strong>RFID RECONCILITAION DETAILS</strong></div>
+    <table class="table table-bordered table-responsive table-hover" style="margin-top:20px;">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-3 clinicalclass">
+                            Unit
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                        RFID Tag
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                       Good Condition ?
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                            Select
+                    </th>
+                </tr>
+            </thead>
+            <tr ng-repeat="consignment in UnLoadConsignmentData">
+                <td>
+                    <span type="text" class="form-control" ng-bind="consignment.unit" required />
+                </td>
+                <td>
+                        <input type="text" class="form-control" ng-model="consignment.rfid" required/>
+                </td>
+                <td>
+                    <select ng-change="CheckConsignment(consignment.goodcondition)" class="form-control" ng-model="consignment.goodcondition" name="goodcondition" required>
+                        <option ng-repeat="type in ConsignmentConditionData" value="{{type.name}}">{{type.name}}</option></select></td>
+                <td style="text-align: center"><input type="checkbox" ng-model="consignment.selected"/></td>
+            </tr>
+            <tr>
+                <td colspan="7" class="col-lg-12">
+                    <button style="float:right;margin-left:20px;" class="btn btn-danger" ng-click="deleterows()" formnovalidate>Remove</button>
+                    <button style="float:right;margin-left:20px;" class="btn btn-primary" ng-click="addrows()" formnovalidate>Add New</button>
+                </td>
+            </tr>
+            <tfoot class="thead-inverse">
+                <tr>
+                    <td class="col-lg-3 clinicalclass">Total Count</td>
+                    <td class="col-lg-3 clinicalclass"> {{UnLoadConsignmentData.length}}</td>
+                    <td class="col-lg-3 clinicalclass" colspan="2"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <td style="text-align: center" class="col-lg-4">
+                    <button class="btn btn-success" ng-click="SaveShipmentUnLoading(Unloadform)">Un Load</button>
+                </td>
+                <td style="text-align: center" class="col-lg-4">
+                    <button class="btn btn-danger" ng-click="deselectUnLoading()" formnovalidate>Cancel</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+     </div>
+</div>
+
+  <div class="loading" id="WaitDiv" style="position:absolute;top:30%;left:30%">
+    <div class="loading-spinner-large" style="display: none;"></div>
+    <div class="loading-spinner-small" style="display: none;"></div>
+  </div>

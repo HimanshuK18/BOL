@@ -1,0 +1,175 @@
+<div class="container" ng-controller="ShippingCompanySendController">
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titlefabrication">
+            Contract Creation</h2>
+    </div>
+    <div id='ShipmentDetailsPlant' class="container col-lg-12">
+        <form name="SipmentFormShippingCompany">
+            <uib-tabset active="activeJustified">
+                <uib-tab index="0" heading="Shipment Details">
+                    <snap style="color:white;">
+                        <table class="table table-bordered table-responsive table-hover">
+                            <tr>
+                                <td class="col-lg-3">Received goods on date:</td>
+                                <td class="col-lg-3">
+                                        <input class="form-control" ng-model="shipmentdetailss.receivedgoodsondate" required type="date" name="receivedgoodsondate" />
+                                </td>
+                                <td class="col-lg-3">Bill of Lading No.</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="shipmentdetailss.billofladingno" required name="billofladingno">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Carrier Name                                    </td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="shipmentdetailss.carriername" required name="carriername">
+                                </td>
+                                <td class="col-lg-3">Carrier SCAC</td>
+                                <td class="col-lg-3">
+                                        <input type="text" class="form-control" ng-model="shipmentdetailss.carrierscac" required name="carrierscac">
+                                </td>
+                            </tr>
+                            <tr>
+                                    <td class="col-lg-3">Ocean Vessel Name</td>
+                                    <td class="col-lg-3">
+                                        <input type="text" class="form-control" ng-model="shipmentdetailss.oceanvesselname" required name="oceanvesselname">
+                                    </td>
+                                    <td class="col-lg-3">Expected Date of loading</td>
+                                    <td class="col-lg-3">
+                                            <input class="form-control" ng-model="shipmentdetailss.expecteddateofloading" required type="date" name="expecteddateofloading" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td class="col-lg-3">Place of receipt:</td>
+                                        <td class="col-lg-3">
+                                            <input type="text" class="form-control" ng-model="shipmentdetailss.placeofreceipt" required name="placeofreceipt">
+                                        </td>
+                                        <td class="col-lg-3">Port of Loading:</td>
+                                        <td class="col-lg-3">
+                                                <input class="form-control" ng-model="shipmentdetailss.portofloading" required type="text" name="portofloading" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                            <td class="col-lg-3">Port of Discharge:</td>
+                                            <td class="col-lg-3">
+                                                <input type="text" class="form-control" ng-model="shipmentdetailss.portofdischarge" required name="portofdischarge">
+                                            </td>
+                                            <td class="col-lg-3">Place of delivery:</td>
+                                            <td class="col-lg-3">
+                                                    <input class="form-control" ng-model="shipmentdetailss.placeofdelivery" required type="text" name="placeofdelivery" />
+                                            </td>
+                                        </tr>
+                        </table>
+                </uib-tab>
+                <uib-tab index="1" heading="Consignment Details">
+                    <snap style="color:white;">
+                        <div style="color:white;margin-top:10px;text-align: center;"><strong>RFID RECONCILITAION DETAILS</strong></div>
+                        <table class="table table-bordered table-responsive table-hover" style="margin-top:20px;">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th class="col-lg-3 clinicalclass">
+                                            Unit
+                                    </th>
+                                    <th class="col-lg-3 clinicalclass">
+                                        RFID Tag
+                                    </th>
+                                    <th class="col-lg-3 clinicalclass">
+                                       Good Condition ?
+                                    </th>
+                                    <th class="col-lg-3 clinicalclass">
+                                            Select
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="consignment in ConsignmentData">
+                                <td>
+                                    <span type="text" class="form-control" ng-bind="consignment.unit" required />
+                                </td>
+                                <td>
+                                        <input type="text" class="form-control" ng-model="consignment.rfid" required/>
+                                </td>
+                                <td>
+                                    <select ng-change="CheckConsignment(consignment.goodcondition)" class="form-control" ng-model="consignment.goodcondition" name="goodcondition" required>
+                                        <option ng-repeat="type in ConsignmentConditionData" value="{{type.name}}">{{type.name}}</option></td>
+                                <td style="text-align: center"><input type="checkbox" ng-model="consignment.selected"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="col-lg-12">
+                                    <button style="float:right;margin-left:20px;" class="btn btn-danger" ng-click="deleterows()" formnovalidate>Remove</button>
+                                    <button style="float:right;margin-left:20px;" class="btn btn-primary" ng-click="addrows()" formnovalidate>Add New</button>
+                                </td>
+                            </tr>
+                            <tfoot class="thead-inverse">
+                                <tr>
+                                    <td class="col-lg-3 clinicalclass">Total Count</td>
+                                    <td class="col-lg-3 clinicalclass"> {{ConsignmentData.length}}</td>
+                                    <td class="col-lg-3 clinicalclass" colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <table class="table table-bordered table-responsive table-hover">
+                                <tr>
+                                    <td class="col-lg-3">BOL to be issued:</td>
+                                    <td class="col-lg-3">
+                                            <span class="form-control" ng-bind="shipmentdetailss.bolissued" name="bolissued" />
+                                    </td>
+                                    <td class="col-lg-3">Clean or Foul?</td>
+                                    <td class="col-lg-3">
+                                        <span ng-bind="shipmentdetailss.cleanorfoul" name="cleanorfoul" ng-style="ClearorFoulStyle">{{shipmentdetailss.cleanorfoul}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td class="col-lg-3">Cost To be Paid by Shipper ($)</td>
+                                        <td class="col-lg-3">
+                                                <input class="form-control" ng-model="shipmentdetailss.costtobepaidbyshipper" required type="number" name="costtobepaidbyshipper" />
+                                        </td>
+                                        <td class="col-lg-3">Remarks By Shipping Co:</td>
+                                        <td class="col-lg-3">
+                            <textarea col="3" rows="3"  class="form-control" ng-model="shipmentdetailss.remarksbyshippingco" required name="remarksbyshippingco" />
+                                        </td>
+                                    </tr>
+                        </table>
+                </uib-tab>
+                <uib-tab index="2" heading="Certificate">
+                        <table class="col-lg-11 table table-bordered table-responsive table-hover" style="margin-top:30px;">
+                                <tr>
+                                    <td colspan="2" style="margin:20px;"> The shipment is received subject to Tariff, Carrier’s pricing schedules, terms, conditions and rules maintained at Carrier’s general of  ces in effect on the date of issueof this Bill of Lading, as well as the National Motor Freight Classi  cations (NMFC), the Hazardous Materials Transportation Regulations (Title 49 — CFR, Subtitle B, Chapter 1, Sub Chapter A-C), and the Household Goods Mileage Guide (HHGB 105 Series)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input style="width:20%;" type="text"  min="1" class="form-control" ng-model="shipmentdetailss.authorizedpersonshippingcompany" name="consignmentauthorizedperson" placeholder="Enter Your Name" required/><span> For, {{name}}</span>
+                                    {{shipmentdetailss.authorizedperson}} </td>
+    
+                                </tr>
+                                <tr>
+                                    <td>
+                                            Container RFID
+                                    </td>
+                                    <td>
+                                <input style="width:20%;" type="text"  class="form-control" ng-model="shipmentdetailss.containerfid" name="containerfid" placeholder="Enter Container RFID" required/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="2">
+                                        <button formnovalidate ng-disabled="AcceptedCertificateShippingComapany == 'Yes'" class="btn btn-success"  ng-click="AcceptCertificateS()">Accept Certificate</button> </td>
+                                </tr>
+                            </table>                             
+                </uib-tab>
+            </uib-tabset>
+
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-success" ng-click="SaveShipmentShippingCompany(SipmentFormShippingCompany)">Save</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-danger" ng-click="CancelShipmentS()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+    </div>    
+</div>
+ <div class="loading" id="WaitDiv" style="position:absolute;top:30%;left:30%">
+      <div class="loading-spinner-large" style="display: none;"></div>
+      <div class="loading-spinner-small" style="display: none;"></div>
+    </div>

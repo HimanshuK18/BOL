@@ -1,0 +1,71 @@
+<div class="container" ng-controller="UraniumstatusController">
+    <div class="col-lg-12" id="DrugLabel">
+        <h2 id="drugTitle" class="page-header topheadline">
+            Uranium Shipment Status
+        </h2>
+    </div>
+    <div class="container col-lg-12" id="divGridDrug">
+        <form id="formDrug">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input class="form-control" type="text" class="form-control" placeholder="Search <Shipment></Shipment>" ng-model="searchDrug">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'productname'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Product Name
+                            <span ng-show="sortType == 'productname' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'productname' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'lotnumber'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Lot Number
+                            <span ng-show="sortType == 'lotnumber' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'lotnumber' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'containernumber'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Container Number
+                            <span ng-show="sortType == 'containernumber' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'containernumber' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'consignee'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Consignee
+                            <span ng-show="sortType == 'consignee' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'consignee' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'status'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Status
+                            <span ng-show="sortType == 'status' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'status' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortType = 'dateshipment'; sortReverse = !sortReverse;" style="color:white;cursor:pointer;">
+                            Shipment Date
+                            <span ng-show="sortType == 'dateshipment' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortType == 'dateshipment' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="shipmentM in shipmentlist | orderBy:sortType:sortReverse | filter:searchDrug">
+                    <td style="padding:4px;">{{shipmentM.productname}}</td>
+                    <td style="padding:4px;">{{shipmentM.lotnumber}}</td>
+                    <td style="padding:4px;">{{shipmentM.containernumber}}</td>
+                    <td style="padding:4px;">{{shipmentM.consignee}}</td>
+                    <td style="padding:4px;">{{shipmentM.status}}</td>
+                    <td style="padding:4px;">{{shipmentM.dateshipment}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

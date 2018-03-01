@@ -1,0 +1,243 @@
+<div class="container" ng-controller="HomeCROController">
+    <div class="col-lg-12">
+       <h2 class="page-header topheadline" id="titleCRO">
+            Shipments</h2>
+</div>
+ <div class="container col-lg-12" id="divGridCRO">
+        <form id="formCRO">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search Shipments" ng-model="searchCRO">
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered table-responsive table-hover">   
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'productname'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Product Name
+                            <span ng-show="sortTypeC == 'productname' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'productname' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'lotnumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Lot Number
+                            <span ng-show="sortTypeC == 'lotnumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'lotnumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'dateshipment'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Shipment Date
+                            <span ng-show="sortTypeC == 'dateshipment' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'dateshipment' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'miningcompanyname'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Mining Company
+                            <span ng-show="sortTypeC == 'miningcompanyname' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'miningcompanyname' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'shipment'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Shipment Number
+                            <span ng-show="sortTypeC == 'shipment' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'shipment' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ShipmentC in ShipmentList | orderBy:sortTypeC:sortReverseC | filter:searchCRO" ng-click="ShowShipment(ShipmentC._id)" style="cursor:pointer;">
+                    <td style="padding:4px;">{{ShipmentC.productname}}</td>
+                    <td style="padding:4px;">{{ShipmentC.lotnumber}}</td>
+                    <td style="padding:4px;">{{ShipmentC.dateshipment}}</td>
+                    <td style="padding:4px;">{{ShipmentC.miningcompanyname}}</td>
+                    <td style="padding:4px;">{{ShipmentC.shipment}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div id='AllocateHospital'  class="container col-lg-12">
+    <form name="CROform">
+    <table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <td class="col-lg-2">
+          Product Name
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.productname == StockDetailsB.productname ? 'bcgood' : 'bcbad'">
+        <span style='color:white'>
+             {{ShipmentDetails.productname}}</span>
+    </td>
+    <td class="col-lg-2">
+         Lot Number
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.lotnumber == StockDetailsB.lotnumber ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.lotnumber}}</span>
+    </td>
+    <td class="col-lg-2">
+         Container Number
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.containernumber == StockDetailsB.containernumber ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.containernumber}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+          Number Of Drums
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.numberofdrums == StockDetailsB.numberofdrums ? 'bcgood' : 'bcbad'">
+        <span style='color:white'>
+             {{ShipmentDetails.numberofdrums}}</span>
+    </td>
+    <td class="col-lg-2">
+         Weight/Drum (Kgs)
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.weight == StockDetailsB.weight ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.weight}}</span>
+    </td>
+    <td class="col-lg-2">
+         Packaging Date
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.packagingdate == StockDetailsB.packagingdate ? 'bcgood' : 'bcbad'">
+     <span style='color:white'>
+          {{ShipmentDetails.packagingdate}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+          Mining Company
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.miningcompanyid == ShipmentDetailsB.miningcompanyid ? 'bcgood' : 'bcbad'">
+        <span style='color:white'> 
+            {{ShipmentDetails.miningcompanyname}}</span>
+    </td>
+    <td class="col-lg-2">
+        Drum Package Certification Report
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.drumpackagecertificationreport == ShipmentDetailsB.drumpackagecertificationreport ? 'bcgood' : 'bcbad'">  
+ <span style='color:white'>
+      {{ShipmentDetails.drumpackagecertificationreport}}</span>
+    </td>
+    <td class="col-lg-2">
+         Inspection Date
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.inspectiondate == ShipmentDetailsB.inspectiondate ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.inspectiondate}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+          Logistics Service Provider
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.logisticsserviceprovider == ShipmentDetailsB.logisticsserviceprovider ? 'bcgood' : 'bcbad'">
+        <span style='color:white'>
+             {{ShipmentDetails.logisticsserviceprovider}}</span>
+    </td>
+    <td class="col-lg-2">
+        Dangerous Goods Declaration Form
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.dangerousgoodsdeclarationform == ShipmentDetailsB.dangerousgoodsdeclarationform ? 'bcgood' : 'bcbad'">
+ <span style='color:white'> 
+     {{ShipmentDetails.dangerousgoodsdeclarationform}}</span>
+    </td>
+    <td class="col-lg-2">
+         Container Certificate of Inspection
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.containercertificateofinspection == ShipmentDetailsB.containercertificateofinspection ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.containercertificateofinspection}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+         Shipment Number
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.shipment == ShipmentDetailsB.shipment ? 'bcgood' : 'bcbad'">
+        <span style='color:white'>
+             {{ShipmentDetails.shipment}}</span>
+    </td>
+    <td class="col-lg-2">
+        Export License
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.exportlicense == ShipmentDetailsB.exportlicense ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.exportlicense}}</span>
+    </td>
+    <td class="col-lg-2">
+         Shipment Date
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.dateshipment == ShipmentDetailsB.dateshipment ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.dateshipment}}</span>
+    </td>
+    </tr>
+     <tr>
+        <td class="col-lg-2">
+         ISO Certificate Number
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.isocertificatenumber == ShipmentDetailsB.isocertificatenumber ? 'bcgood' : 'bcbad'">
+        <span style='color:white'>
+             {{ShipmentDetails.isocertificatenumber}}</span>
+    </td>
+    <td class="col-lg-2">
+        Contract Number
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.contractno == ShipmentDetailsB.contractno ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.contractno}}</span>
+    </td>
+    <td class="col-lg-2">
+        Shipment Notification Document
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.shipmentnotificationdocument == ShipmentDetailsB.shipmentnotificationdocument ? 'bcgood' : 'bcbad'">
+ <span style='color:white'> 
+     {{ShipmentDetails.shipmentnotificationdocument}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+         Inspection By
+    </td>
+    <td class="col-lg-2" ng-class="ShipmentDetails.inspected == ShipmentDetailsB.inspected ? 'bcgood' : 'bcbad'">
+ <span style='color:white'>
+      {{ShipmentDetails.inspected}}</span>
+    </td>
+    <td class="col-lg-2"> Shipment HASH Code</td>
+     <td class="col-lg-6" colspan="5" style='color:white'> {{ShipmentDetails.hashcode}}</td>
+    </tr>
+    <tr>
+        <td class="col-lg-2"> Shipment Files</td>
+     <td class="col-lg-10" id="ShipmentFiles" colspan="5"> </td>
+    </tr>
+    <tr>
+                    <td colspan="6" style="text-align:center;color:red;font-weight:bold;">
+                        <span style="text-align:center;color:red;" id="message"></span>
+                    </td>
+                </tr>
+</table>   
+ <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center">
+                        <button class="btn btn-danger" ng-click="Reject(CROform)">Reject Shipment</button>
+                    </td>
+                    <td style="text-align: center">
+                        <button class="btn btn-success" ng-click="AcceptShipment(CROform)">Accept Shipment</button>
+                    </td>
+                    <td style="text-align: center">
+                        <button class="btn btn-danger" ng-click="deselectCRO()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>                
+            </table>
+            </form>
+</div>
+</div>
+ <div class="loading" id="WaitDiv" style="position:absolute;top:30%;left:30%">
+      <div class="loading-spinner-large" style="display: none;"></div>
+      <div class="loading-spinner-small" style="display: none;"></div>
+    </div>

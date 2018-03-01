@@ -1,0 +1,172 @@
+<div class="container" ng-controller="PlantController">
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titlefabrication">
+            Nuclear Plant</h2>
+    </div>
+    <div class="container col-lg-12" id="divGridPlant">
+        <form id="formfabrication">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchfabrication">
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'owner'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Owner
+                            <span ng-show="sortTypeC == 'owner' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'owner' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'Consignor'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Fabrication Company
+                            <span ng-show="sortTypeC == 'Consignor' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'Consignor' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'operator'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Operator
+                            <span ng-show="sortTypeC == 'operator' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'operator' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'facilitypurpose'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Facility Purpose
+                            <span ng-show="sortTypeC == 'facilitypurpose' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'facilitypurpose' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'facilitylayout'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Facility Layout
+                            <span ng-show="sortTypeC == 'facilitylayout' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'facilitylayout' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="plant in PlantList | orderBy:sortTypeC:sortReverseC | filter:searchfabrication" ng-click="ShowShipmentPlant(plant._id)" style="cursor:pointer;">
+                    <td style="padding:4px;">{{plant.owner}}</td>
+                    <td style="padding:4px;">{{plant.Consignor}}</td>
+                    <td style="padding:4px;">{{plant.operator}}</td>
+                    <td style="padding:4px;">{{plant.facilitypurpose}}</td>
+                    <td style="padding:4px;">{{plant.facilitylayout}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id='ShipmentDetailsPlant'  class="container col-lg-12">
+    <form name="PlantShipmentDetailsForm">
+    <table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <td class="col-lg-2">
+          Faclity Name
+    </td>
+    <td class="col-lg-2">
+        <span ng-style="{ color: PlantShipmentDetails.namefacility == PlantShipmentDetailsB.namefacility ? 'white' : 'red' }">
+             {{PlantShipmentDetails.FaclityName}}</span>
+    </td>
+    <td class="col-lg-2">
+         Postal Address
+    </td>
+    <td class="col-lg-2">
+ <span ng-style="{ color: PlantShipmentDetails.postaladdress == PlantShipmentDetailsB.postaladdress ? 'white' : 'red' }">
+      {{PlantShipmentDetails.postaladdress}}</span>
+    </td>
+    <td class="col-lg-2">
+         Country
+    </td>
+    <td class="col-lg-2">
+ <span ng-style="{ color: PlantShipmentDetails.country == PlantShipmentDetailsB.country ? 'white' : 'red' }">
+      {{PlantShipmentDetails.country}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+           Owner
+    <td class="col-lg-2">
+        <span ng-style="{ color: PlantShipmentDetails.owner == PlantShipmentDetailsB.owner ? 'white' : 'red' }">
+             {{PlantShipmentDetails.owner}}</span>
+    </td>
+        <td class="col-lg-2">Operator
+    </td>
+    <td class="col-lg-2">
+        <span ng-style="{ color: PlantShipmentDetails.operator == PlantShipmentDetailsB.operator ? 'white' : 'red' }">
+             {{PlantShipmentDetails.operator}}</span>
+    </td>
+    <td class="col-lg-2">
+         Facility Discription
+    </td>
+    <td class="col-lg-2">
+ <span ng-style="{ color: PlantShipmentDetails.facilitydiscription == PlantShipmentDetailsB.facilitydiscription ? 'white' : 'red' }">
+      {{PlantShipmentDetails.facilitydiscription}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+         Facility Purpose
+    </td>
+    <td class="col-lg-2">
+     <span ng-style="{ color: PlantShipmentDetails.facilitydiscription == PlantShipmentDetailsB.facilitydiscription ? 'white' : 'red' }">
+          {{PlantShipmentDetails.facilitypurpose}}</span>
+    </td>
+        <td class="col-lg-2">
+        Facility Layout
+    </td>
+    <td class="col-lg-2">
+        <span ng-style="{ color: PlantShipmentDetails.facilitylayout == PlantShipmentDetailsB.facilitylayout ? 'white' : 'red' }">
+             {{PlantShipmentDetails.facilitylayout}}</span>
+    </td>
+    <td class="col-lg-2">
+        Shift Incharge Name
+    </td>
+    <td class="col-lg-2">
+ <span ng-style="{ color: PlantShipmentDetails.shiftinchargename == PlantShipmentDetailsB.shiftinchargename ? 'white' : 'red' }">
+      {{PlantShipmentDetails.shiftinchargename}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td class="col-lg-2">
+         Safety Incharge Name
+    </td>
+    <td class="col-lg-2">
+ <span ng-style="{ color: PlantShipmentDetails.safetyinchargename == PlantShipmentDetailsB.safetyinchargename ? 'white' : 'red' }">
+      {{PlantShipmentDetails.safetyinchargename}}</span>
+    </td>
+    <td class="col-lg-2"> Shipment HASH Code</td>
+     <td style='color:white' class="col-lg-6" colspan="5">
+         {{PlantShipmentDetails.hashcode}} </td>
+        
+    </tr>
+        <tr>
+            <td class="col-lg-2"> Shipment Files</td>
+     <td class="col-lg-6" id="ShipmentFiles" colspan="5"> </td>
+        </tr>
+    <tr>
+                    <td colspan="6" style="text-align:center;color:red;font-weight:bold;">
+                        <span style="text-align:center;color:red;" id="message"></span>
+                    </td>
+    </tr>
+</table>
+    
+ <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-danger" ng-click="RejectP(PlantShipmentDetails._id)">Reject Shipment</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-success" ng-click="AcceptShipmentF(PlantShipmentDetails._id)">Accept Shipment</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-danger" ng-click="deselectShipmentF()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+                
+            </table>
+            </form>
+</div>
+</div>

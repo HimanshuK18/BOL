@@ -1,0 +1,187 @@
+<div class="container" ng-controller="ContractController">
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titlefabrication">
+            Contract Creation</h2>
+    </div>
+    <div id='ShipmentDetailsPlant' class="container col-lg-12">
+        <form name="SipmentForm">
+            <uib-tabset active="activeJustified">
+                <uib-tab index="0" heading="Shipment Details">
+                    <snap style="color:white;">
+                        <table class="table table-bordered table-responsive table-hover">
+                            <tr>
+                                <td class="col-lg-3">PO Number</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="shipmentdetails.ponumber" required name="shipmentdetailsponumber">
+                                </td>
+                                <td class="col-lg-3">Notifying Party</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="shipmentdetails.notifyingparty" required name="shipmentdetailsnotifyingparty">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Let Export Order No. by Custom:</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="shipmentdetails.ordernumber" required name="shipmentdetailsordernumber">
+                                </td>
+                                <td class="col-lg-3">Goods handing over to Shipping Party on Dt.:</td>
+                                <td class="col-lg-3">
+                                    <input class="form-control" ng-model="shipmentdetails.handovershippingdate" required type="date" name="shipmentdetailshandovershippingdate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Shipper (FROM)</td>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Consignee (TO)</td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Name</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.shippername}}
+                                </td>
+                                <td class="col-lg-3">Name</td>
+                                <td class="col-lg-3">
+                                    <select ng-change="ChangeConsignee()" class="form-control" ng-model="shipmentdetails.consignee" name="shipmentdetails.consigneename" required>
+                                        <option ng-repeat="coption in ConsigneeList" value="{{coption._id}}">{{coption.companyname}}</option></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Address</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.shipperaddress}}
+                                </td>
+                                <td class="col-lg-3">Address</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.consigneeaddress}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">City</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.shippercity}}
+                                </td>
+                                <td class="col-lg-3">City</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.consigneecity}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Country</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.shippercountry}}
+                                </td>
+                                <td class="col-lg-3">Country</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.consigneecountry}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Phone</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.shipperphone}}
+                                </td>
+                                <td class="col-lg-3">Phone</td>
+                                <td class="col-lg-3">
+                                    {{shipmentdetails.consigneephone}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3" >Shipping Company</td>
+                                <td class="col-lg-3" >
+                                    <select class="form-control" ng-model="shipmentdetails.shippingcompany" name="shipmentdetails.shippingcompany" required>
+                                        <option ng-repeat="soption in ShippingCompanyList" value="{{soption._id}}">{{soption.companyname}}</option></select>
+                                </td>
+                                <td class="col-lg-3" >Place of Handing Over</td>
+                                <td class="col-lg-3" >
+                                     <input type="text" class="form-control" ng-model="shipmentdetails.placeofhandingover" required name="placeofhandingover">
+                                </td>
+                            </tr>
+                        </table>
+                </uib-tab>
+                <uib-tab index="1" heading="Consignment Details">
+                    <snap style="color:white;">
+                        <table class="table table-bordered table-responsive table-hover" style="margin-top:30px;">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th class="col-lg-2 clinicalclass">
+                                        Handling Unit
+                                    </th>
+                                    <th class="col-lg-1 clinicalclass">
+                                        Type
+                                    </th>
+                                    <th class="col-lg-2 clinicalclass">
+                                        RFID Code
+                                    </th>
+                                    <th class="col-lg-1 clinicalclass">
+                                        Hazardous Material
+                                    </th>
+                                    <th class="col-lg-4 clinicalclass">
+                                        Description
+                                    </th>
+                                    <th class="col-lg-1 clinicalclass">
+                                        Weight (Kgs)
+                                    </th>
+                                    <th class="col-lg-1 clinicalclass">
+                                        Select
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="consignment in consignmentData">
+                                <td>
+                                    <input type="text" class="form-control" ng-model="consignment.unit" name="consignmentunit" required/>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="consignment.type" name="consignmenttype" required>
+                                        <option ng-repeat="type in ConsignmentTypeData" value="{{type.name}}">{{type.name}}</option>
+                                </td>
+                                <td><input type="text" class="form-control" ng-model="consignment.rfid" name="consignmentrfid" /></td>
+                                <td>
+                                        <select class="form-control" ng-model="consignment.hazardousmaterial" name="consignmenthazardousmaterial" required>
+                                                <option ng-repeat="mtype in HazardousMaterialData" value="{{mtype.name}}">{{mtype.name}}</option>
+                                </td>
+                                <td>
+                                 <textarea rows="2" style="margin:3px;" cols="40" class="form-control" ng-model="consignment.description" required type="text" name="consignmentdescription"/>
+                                </td>
+                                <td><input type="number"  min="1" class="form-control" ng-model="consignment.weight" name="consignmentweight" required/></td>
+                                <td style="text-align: center"><input type="checkbox" ng-model="consignment.selected"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="col-lg-12">
+                                    <button style="float:right;margin-left:20px;" class="btn btn-danger" ng-click="deleterow()" formnovalidate>Remove</button>
+                                    <button style="float:right;margin-left:20px;" class="btn btn-primary" ng-click="addrow()" formnovalidate>Add New</button>
+                                </td>
+                            </tr>
+                        </table>
+
+                </uib-tab>
+                <uib-tab index="2" heading="Certificate">
+                        <table class="col-lg-11 table table-bordered table-responsive table-hover" style="margin-top:30px;">
+                            <tr>
+                                <td style="margin:20px;">I hereby declare that the contents of this consignment are fully and accurately described above by the proper shipping name, and are classied, packaged, marked and labeled/
+                                        placarded, and are in all respects in proper condition for transport according to applicable international and national governmental regulations.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input style="width:20%;" type="text"  min="1" class="form-control" ng-model="shipmentdetails.authorizedperson" name="consignmentauthorizedperson" placeholder="Enter Your Name" required/><span> For, {{name}}</span>
+                                {{shipmentdetails.authorizedperson}} </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">
+                                    <button formnovalidate ng-disabled="AcceptedCertificate == 'Yes'" class="btn btn-success"  ng-click="AcceptCertificate()">Accept Certificate</button> </td>
+                            </tr>
+                        </table>                             
+                </uib-tab>
+            </uib-tabset>
+
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-success" ng-click="SaveShipment(SipmentForm)">Create</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-danger" ng-click="deselectContract()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
