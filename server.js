@@ -38,8 +38,23 @@ var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket){
     console.log('a user connected');
-    socket.on('chat message', function(msg){
-      console.log('message:' + msg);
-      io.emit('chat message', msg);
+        socket.on('rfid value', function(msg){
+        console.log('rfid message:' + msg);
+        io.emit('rfid msg',msg);
     });
-  });
+    });
+    app.post('/rfid',function(req,res){
+    var data=JSON.stringify(req.body);
+    var rfidvalue=JSON.parse(data);
+    var num=rfidvalue.Number;
+    var ty=rfidvalue.Type;
+    var type=ty.replace(/\s/g, '');
+    if(type=="container"){
+        io.emit('rfid container',{num,type});
+    }
+    else{
+        io.emit('rfid value',{num,type});
+    }
+    res.send("All Ok!!");
+    });
+  
