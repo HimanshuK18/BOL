@@ -2,7 +2,7 @@ var fs = require('fs');
 var contractPath = './contract/DataContract1.sol';
 var contractPathBusinessRule = './contract/BusinessRules.sol';
 var Web3 = require('web3');
-var NodeURL = "http://54.242.222.243:22000";
+var NodeURL = "http://13.126.166.123:22000";
 var account = '0xed9d02e382b34818e88b88a309c7fe71e65f419d';
 var PrivateTo = "ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc=";
 var dbUrl = require("../config/db");
