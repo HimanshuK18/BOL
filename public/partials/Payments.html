@@ -1,0 +1,110 @@
+<div class="container" ng-controller="PaymentsController">
+    <div class="col-lg-12">
+       <h2 class="page-header topheadline" id="titlePayment">
+          {{name}} Payments</h2>
+</div>
+ <div class="container col-lg-12" id="divGridPayment">
+        <form id="formPayment">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search Payments" ng-model="searchPayment">
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered table-responsive table-hover">   
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 col-md-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'contractid'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Contract ID
+                            <span ng-show="sortTypeC == 'contractid' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'contractid' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-4 col-md-4 clinicalclass">
+                        <a ng-click="sortTypeC = 'details'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Details
+                            <span ng-show="sortTypeC == 'details' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'details' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2  col-md-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'companyname'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Party
+                            <span ng-show="sortTypeC == 'companyname' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'companyname' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 col-md-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'amountcredit'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Payment Recived
+                            <span ng-show="sortTypeC == 'amountcredit' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'amountcredit' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 col-md-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'amountdebit'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Paid
+                            <span ng-show="sortTypeC == 'amountdebit' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'amountdebit' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Payment in PaymentList | orderBy:sortTypeC:sortReverseC | filter:searchPayment" ng-click="ShowPayment(Payment._id)" style="cursor:pointer;">
+                    <td style="padding:4px;">{{Payment.contractid}}</td>
+                    <td style="padding:4px;">{{Payment.details}}</td>
+                    <td style="padding:4px;">{{Payment.companyname}}</td>
+                    <td style="padding:4px;">{{Payment.amountcredit}}</td>
+                    <td style="padding:4px;">{{Payment.amountdebit}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div id='PaymentDetail'  class="container col-lg-12">
+<div class="col-lg-12 col-md-12 labelstylebg">
+            <div class="col-lg-4 col-md-4" style="padding-top:10px;">
+                <span class="labelstyle">Contract ID</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span class="form-control labelstylevalue" name="contractid" id="contractid" ng-bind="PaymentDetails.contractid" >
+            </div>
+        </div>     
+
+<div class="col-lg-12 col-md-12 labelstylebg">
+            <div class="col-lg-4 col-md-4" style="padding-top:10px;"><span class="labelstyle">Details</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span class="form-control labelstylevalue" name="details" id="details" ng-bind="PaymentDetails.details" >
+           </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebg">
+            <div class="col-lg-4 col-md-4" style="padding-top:10px;"><span class="labelstyle">Date Of Tranaction</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span class="form-control labelstylevalue" name="location" id="date" ng-bind="PaymentDetails.date" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebg">
+            <div class="col-lg-4 col-md-4" style="padding-top:10px;"><span class="labelstyle">Amount Credit (USD)</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span class="form-control labelstylevalue" name="amountcredit" id="amountcredit" ng-bind="PaymentDetails.amountcredit" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 labelstylebg">
+            <div class="col-lg-4 col-md-4" style="padding-top:10px;"><span class="labelstyle">Amount Debit (USD)</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span class="form-control labelstylevalue" name="amountdebit" id="amountdebit" ng-bind="PaymentDetails.amountdebit" >
+            </div>
+        </div>
+       <div class="col-lg-12 col-md-12 labelstylebg">
+            <div class="col-lg-4 col-md-4" style="padding-top:10px;"><span class="labelstyle">Company Name</span> </div>
+            <div class="col-lg-8 col-md-8">
+                <span class="form-control labelstylevalue" name="companyname" id="companyname" ng-bind="PaymentDetails.companyname" >
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12">            
+            <button class="btn btn-info btn-md" ng-click="Close()" 
+            style="margin-top:2%;margin-left:35%;" style="padding-left:5px;padding-right:5px;">Close</button>
+        </div>
+</div>
+</div>
+ <div class="loading" id="WaitDiv" style="position:absolute;top:30%;left:30%">
+      <div class="loading-spinner-large" style="display: none;"></div>
+      <div class="loading-spinner-small" style="display: none;"></div>
+    </div>

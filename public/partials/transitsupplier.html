@@ -1,0 +1,109 @@
+<div class="container" ng-controller="supplierController" style="min-height: 600px;width:100%;" ng-style="{'background-image':'url(Images/3pl.jpg)','background-size': 'cover'}" >
+    
+    <div class="col-lg-12" id="ExpoterLabel">
+        <h2 id="ExpoterTitle" class="page-header topheadline">
+            Transit View
+        </h2> 
+         
+</br><br>
+    </div>
+
+   <div>
+       <table class="table table-bordered table-responsive table-hover" style="border-top: 10px solid black;border-left: 10px solid black;border-right: 5px solid black;border-bottom: 5px solid black;width:100%;">
+           <tr>
+                    <th class="col-lg-4 clinicalclass" style="border: 1px solid black;">Shipment Number</th>
+                    <th class="col-lg-4 clinicalclass" style="border: 1px solid black;">Customer Name</th>
+                    <th class="col-lg-4 clinicalclass" style="border: 1px solid black;">Material Name</th>
+            </tr>
+                <tr>
+                    <td class="col-lg-4" style="border: 1px solid black;">456773</td>
+                    <td class="col-lg-4" style="border: 1px solid black;">ABC Chemicals</td>
+                    <td class="col-lg-4" style="border: 1px solid black;">PMDI</td>
+                </tr>
+       </table>
+    <!--   <i class="fa fa-truck fa-5x fa-flip-horizontal" aria-hidden="true"></i> -->
+    </div>
+   
+    <div style="width:100%"> 
+        <img id="t1" class="firstimg" src="/Images/truckg.png" alt="Oops" height="100px" width="100px" style="margin-left:270px;"/>
+        <img style="margin-left:180px" src="/Images/shipg.png" alt="Oops" height="100px" width="100px" />
+        <img id="t2" style="margin-left:160px" src="/Images/truckg.png" alt="Oops" height="100px" width="100px" ng-mouseover="t1load()"  ng-mouseleave="t1hide()" />        
+        <table class="mytable" id="tableone" >
+            <tr bgcolor="red"><td>Temperature:20⁰ C</td></tr>
+            <tr bgcolor="#008CBA"><td>Actual ETD: 23/11/2017</td></tr>
+            <tr bgcolor="#008CBA"><td>Scheduled ETD:22/11/2017</td></tr>
+        </table>
+    </div> 
+    
+
+   <div style="padding-left:150px">
+       <img src="/Images/manufacturer.png" alt="Oops" height="80" width="80"/> 
+       <img src="/Images/garrow.png" alt="Oops" height="30" width="180" style="margin-left:20px;"/> 
+       <img src="/Images/port.png" alt="Oops" height="80" width="80"/>
+        <img src="/Images/garrow.png" alt="Oops" height="30" width="180" style="margin-left:20px;"/>
+         <img src="/Images/port.png" alt="Oops" height="80" width="80"/>
+         <img src="/Images/redarrow.png" alt="Oops" height="30" width="180" style="margin-left:20px;"/>
+          <img src="/Images/customer.png" alt="Oops" height="80" width="80"/>
+   </div>
+        <br>
+   <div style="padding-left:100px">
+        <lable class="col-lg-2 clinicalclass">Manufacturer</lable>
+        <lable class="col-lg-2 clinicalclass" style="margin-left:80px">Loading Port</lable>
+        <lable class="col-lg-2 clinicalclass" style="margin-left:80px">Unloading Port</lable>
+        <lable class="col-lg-2 clinicalclass" style="margin-left:80px">Customer</lable>
+   <br><br>
+    </div>
+   
+   
+   
+   
+   <lable class="col-lg-3 clinicalclass" style="margin-top:80px">News Feed:</lable>
+<table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                             Lat-Long
+                            <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ConsigneeName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Name of Country
+                            <span ng-show="sortTypeC == 'ConsigneeName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ConsigneeName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ShippingCompanyName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Place
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Probable disruption
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                        <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Next day weather prediction
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Shipment in shipmentlist | orderBy:sortTypeC:sortReverseC | filter:searchExpoter" >
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.LatLong[0]}},{{Shipment.LatLong[1]}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.country}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.city}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.location}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.forcast}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        </div>

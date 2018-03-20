@@ -1,0 +1,292 @@
+<div class="container" ng-controller="3plController" style="min-height:1000px; min-width:1000px;" ng-style="{'background-image':'url(Images/3pl.jpg)','background-size': 'cover'}">
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titlefabrication">
+            3PL DETAILS</h2>
+    </div>
+    <div id='ShipmentDetailsPlant' class="container col-lg-12">
+        <form name="SipmentForm">
+            <uib-tabset active="activeJustified">
+                
+                <uib-tab index="1" heading="Transaction History Details">
+                    <snap style="color:white;">
+                        
+                      
+    
+    
+<!-- Maps and charts -->
+    <div style="height:400px;width:500px;">
+        <table>
+            <tr>
+                <td>
+                      <div id="map"></div>
+                </td>
+   
+                <td>
+                    <div style="height:300px;width:300px;">
+                        <canvas id="doughnut" class="chart chart-doughnut"
+                            chart-data="dataDoughnut" chart-labels="labelsDoughnut">
+                        </canvas> 
+                    </div>
+                </td>
+
+                <td>
+
+                     <div style="height:300px;width:300px;">
+                        <canvas id="line" class="chart chart-line" chart-data="data"
+                            chart-labels="labels" chart-series="series" chart-options="options"
+                            chart-dataset-override="datasetOverride" chart-click="onClick">
+                        </canvas>
+                    </div>
+                </td>
+            </tr>
+        </table>
+</div>
+
+
+<!-- end of maps and charts -->
+
+    <div class="container col-lg-12" id="divGridExpoter">
+        <form id="formExpoter">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <input class="form-control" type="text" class="form-control" placeholder="Search Shipments" ng-model="searchExpoter">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            JOB Number
+                            <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ConsigneeName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Vessel Name
+                            <span ng-show="sortTypeC == 'ConsigneeName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ConsigneeName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ShippingCompanyName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Invoice Number
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Container Number
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'placeofdilivery'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Bill of lading
+                            <span ng-show="sortTypeC == 'placeofdilivery' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'placeofdilivery' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Shipment in shipmentlist | orderBy:sortTypeC:sortReverseC | filter:searchExpoter" style="cursor:pointer;">
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.jobno}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.vesselname}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.logisticsinvoiceno}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.containerno}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.logbol}}, {{Shipment.consigneecountry}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+
+
+
+                </uib-tab>
+                <uib-tab index="2" heading="New Entity">
+                                              <div class="container"  ng-style="{'background-image':'url(Images/3pl.jpg)','background-size': 'cover'}">
+    
+    <div id='ShipmentDetailsPlant' class="container col-lg-12">
+        <form name="SipmentForm">
+            
+                        <table class="table table-bordered table-responsive table-hover">
+                            <tr>
+                                <td class="col-lg-3">Job Order Number</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.jobno" required name="logisticsjobno">
+                                </td>
+                                <td class="col-lg-3">ETD</td>
+                                <td class="col-lg-3">
+                                    <input type="time" class="form-control" ng-model="logistics.logisticsetd" required name="logisticslogisticsetd">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Vessel Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.vesselname" required name="logisticsvesselname">
+                                </td>
+                                <td class="col-lg-3">Pickup date from shipper</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.pickupshipperdate" required type="date" name="logisticspickupshipperdate" />
+                                </td>
+                            </tr>
+                           <!-- <tr>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Shipper (FROM)</td>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Consignee (TO)</td>
+
+
+                            </tr> -->
+                            <tr>
+                                <td class="col-lg-3">Invoice Number</td>
+                                <td class="col-lg-3">
+                                   <input type="number" class="form-control" ng-model="logistics.logisticsinvoiceno" required type="number" name="logisticslogisticsinvoiceno" />
+                                </td>
+                                <td class="col-lg-3">Bill of lading</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.logbol" required type="number" name="logisticslogbol" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Container Number</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.containerno" required type="number" name="logisticscontainerno" />
+                                </td>
+                                <td class="col-lg-3">Load Port Transporter</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.loadingporttransporter" required type="text" name="logisticsloadingporttransporter" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Discharge Port Transporter</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.dischargeporttransporter" required type="text" name="logisticsdischargeporttransporter" />
+                                </td>
+                                <td class="col-lg-3">Invoice Date</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.invoicedate" required type="date" name="logisticsinvoicedate" />
+                                </td>
+                            </tr>
+                            
+                    
+                        </table>
+               <!-- </uib-tab>
+                
+                
+            </uib-tabset> -->
+
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-success" ng-click="SaveShipment(SipmentForm)">Create</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-danger" ng-click="deselectContract()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+    </div>
+</div>      
+                </uib-tab>
+
+                <uib-tab index="0" heading="Future Use">
+                    <snap style="color:white;">
+                        
+                </uib-tab>
+            </uib-tabset>
+
+            
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- 3rd approach
+  <div class="container" >
+  <h2>Dynamic Tabs</h2>
+  <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
+</div> -->
+<!-- 1st approach
+  <div class="container" ng-controller="tabController" >
+
+<div class="tab">
+  <button class="tablinks"  ng-init="tab = 1" ng-class="{active:tab===1}" ng-click="tab = 1">London</button>
+  <button class="tablinks" ng-class="{active:tab===2}" ng-click="tab = 2">Paris</button>
+  <button class="tablinks" ng-class="{active:tab===3}" ng-click="tab = 3">Tokyo</button>
+</div>
+
+<div id="London" class="tabcontent" ng-show="tab === 1">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent" ng-show="tab === 2">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="tabcontent" ng-show="tab === 3">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+-->
+
+
+<!--    2nd approach
+<ul ng-init="tab = 1">
+			<li ng-class="{active:tab===1}"> 
+				<a href ng-click="tab = 1">What you eat?</a>	
+			</li>
+			<li ng-class="{active:tab===2}"> 
+				<a href ng-click="tab = 2">Favorite juice?</a> 
+			</li>
+			<li ng-class="{active:tab===3}"> 
+				<a href ng-click="tab = 3">Do you close your eyes?</a> 
+			</li>
+			<br><br>
+			<p ng-show="tab === 1"> I eat chocolates, alive! </p>
+			<p ng-show="tab === 2"> I drink pulpy orange juice, mango milk shake... </p>
+			<p ng-show="tab === 3"> yeah, I sleep at weekend. I am human... :D</p>
+		</ul>		
+
+</div>-->

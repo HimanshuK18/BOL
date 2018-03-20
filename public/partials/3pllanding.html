@@ -1,0 +1,133 @@
+<div class="container" ng-controller="3pllandingController" style="min-height: 600px;width:100%;" ng-style="{'background-image':'url(Images/3pl.jpg)','background-size': 'cover'}" >
+    
+    <div class="col-lg-12" id="ExpoterLabel">
+        <h2 id="ExpoterTitle" class="page-header topheadline">
+            Logistics and shipping Dashboard
+        </h2> 
+         <nav class="nav navbar-default" >
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav"  >
+      <li class="active"><a href="#/3pllanding">Dashboard</a></li>
+      <li><a href="#/3pl">New Entity</a></li>
+      <li><a href="#/transit3pl">Transit View</a></li>
+      <li><a href="#">Analytics</a></li>
+      <li><a href="#">Alerts</a></li>
+    </ul>
+  </div>
+</nav>
+</br><br>
+    </div>
+   
+<!-- Maps and charts -->
+    <div >
+        <table BORDER=10 BORDERCOLOR=Black>
+            <tr>
+                    <th class="col-lg-2 clinicalclass">Consignment Details</th>
+            
+                    <th class="col-lg-2 clinicalclass"></th>
+            
+                    <th class="col-lg-2 clinicalclass">On Time Delivery</th>
+            </tr>
+
+            <tr>
+                <td>
+                      <div id="map" style="height:400px;width:600px"> </div>
+                </td>
+   
+                
+
+                <td colspan="2">
+                     <div style="height:300px;width:500px;background-color: white">
+                        <canvas id="line" class="chart chart-line" chart-data="data"
+                            chart-labels="labels" chart-series="series" chart-options="options"
+                            chart-dataset-override="datasetOverride" chart-click="onClick">
+                        </canvas>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><canvas id="bar" class="chart chart-bar"
+                    chart-data="data" chart-labels="labels"> chart-series="series"
+                  </canvas></td>
+                <td>
+                        
+                    <div style="height:300px;width:300px;">
+                           
+                        <canvas id="doughnut" class="chart chart-doughnut"
+                            chart-data="dataDoughnut" chart-labels="labelsDoughnut">
+                        </canvas> 
+                        <P><center>
+                            Within time limit:<font color="white">628</font> </br>
+                            Out of time limit:<font color="white">49</font>
+                            </center>
+                        </P>
+                    </div>
+                </td>
+                <td><canvas id="bar1" class="chart chart-bar"
+                    chart-data="data" chart-labels="labels" chart-series="series"></canvas></td>
+            </tr>
+        </table>
+
+</div>
+<!-- end of maps and charts -->
+
+    <div class="container col-lg-12" id="divGridExpoter">
+        <form id="formExpoter">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <input class="form-control" type="text" class="form-control" placeholder="Search Shipments" ng-model="searchExpoter">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Sr. No
+                            <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ConsigneeName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            JOB Number
+                            <span ng-show="sortTypeC == 'ConsigneeName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ConsigneeName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ShippingCompanyName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Date of Creation
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Status
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Shipment in shipmentlist | orderBy:sortTypeC:sortReverseC | filter:searchExpoter" style="cursor:pointer;">
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{$index +1}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.jobno}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.DateOfCreation}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.status}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   
+    
+</div>

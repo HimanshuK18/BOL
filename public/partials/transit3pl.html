@@ -1,0 +1,140 @@
+<div class="container" ng-controller="3plController" style="min-height: 600px;width:100%;" ng-style="{'background-image':'url(Images/3pl.jpg)','background-size': 'cover'}" >
+    
+    <div class="col-lg-12" id="ExpoterLabel">
+        <h2 id="ExpoterTitle" class="page-header topheadline">
+            Transit View
+        </h2> 
+         <nav class="nav navbar-default" >
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav"  >
+      <li ><a href="#/3pllanding">Dashboard</a></li>
+      <li><a href="#/3pl">New Entity</a></li>
+      <li class="active"><a href="#/transit3pl">Transit View</a></li>
+      <li><a href="#">Analytics</a></li>
+      <li><a href="#">Alerts</a></li>
+    </ul>
+  </div>
+</nav>
+</br><br>
+    </div>
+
+    <div>
+            <table>
+            <tr>
+                    <th height="200" width="200"></th>
+                    <th height="200" width="200"><img src="/Images/truck1.png" alt="Oops" height="150" width="150" align="center"></th>
+                    <th height="200" width="200"></th>
+                    <th height="200" width="200"><img src="/Images/ship.png" alt="Oops" height="150" width="150" align="left"></th>
+                    <th height="200" width="200"></th>
+                    <th height="200" width="200"><img src="/Images/truck1.png" alt="Oops" height="150" width="150" align="center"></th>
+                    <th height="200" width="200"></th>
+            </tr>
+            <tr>
+                    <td height="200" width="200"><img src="/Images/target.png" alt="Oops" height="150" width="150" align="center"></td>
+                    <td height="200" width="200"><img src="/Images/greenArrow1.png" alt="Oops" height="150" width="200" align="center"></td>
+                    <td height="200" width="200"><img src="/Images/target.png" alt="Oops" height="150" width="150" align="center"></td>
+                    <td height="200" width="200"><img src="/Images/greenArrow1.png" alt="Oops" height="150" width="200" align="center"></td>
+                    <td height="200" width="200"><img src="/Images/target.png" alt="Oops" height="150" width="150" align="center"></td>
+                    <td height="200" width="200"><img src="/Images/blackArrow.png" alt="Oops" height="150" width="200" align="center"></td>
+                    <td height="200" width="200"><img src="/Images/target.png" alt="Oops" height="150" width="150" align="center"></td>
+
+            </tr>
+            <tr>
+                    <td height="200" width="200"><button class="button">Chemical Manufactures</button></td>
+                    <td height="200" width="200"></td>
+                    <td height="200" width="200"><button class="button">Loading Port</button></td>
+                    <td height="200" width="200"></td>
+                    <td height="200" width="200"><button class="button">Discharge Port</button></td>
+                    <td height="200" width="200"></td>
+                    <td height="200" width="200"><button class="button">Customer</button></td>
+                    
+            </tr>
+
+            <tr>
+                <td>
+                      
+                </td>
+   
+
+
+    </div>
+
+<table class="table table-bordered table-responsive table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ponumber'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                             Order ID
+                            <span ng-show="sortTypeC == 'ponumber' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ponumber' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ConsigneeName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Vehicle Number
+                            <span ng-show="sortTypeC == 'ConsigneeName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ConsigneeName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-2 clinicalclass">
+                        <a ng-click="sortTypeC = 'ShippingCompanyName'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Date of Creation
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'ShippingCompanyName' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Time
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                        <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Location
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Max Temp(Celsius)
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                        <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Max Pressure(atm)
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                        <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Data Packet
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                        <th class="col-lg-3 clinicalclass">
+                        <a ng-click="sortTypeC = 'TransactionCode'; sortReverseC = !sortReverseC;" style="color:white;cursor:pointer;">
+                            Contract Status
+                            <span ng-show="sortTypeC == 'TransactionCode' && !sortReverseC" class="glyphicon glyphicon-arrow-down"></span>
+                            <span ng-show="sortTypeC == 'TransactionCode' && sortReverseC" class="glyphicon glyphicon-arrow-up"></span>
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Shipment in shipmentlist | orderBy:sortTypeC:sortReverseC | filter:searchExpoter" style="cursor:pointer;">
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{$index +1}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.orderid}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.vehiclenumber}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.time}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.location}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.maxtemp}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.maxpreassure}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.datapacket}}</td>
+                    <td style="padding:4px;" ng-click="ShowShipmentS(Shipment._id)">{{Shipment.contractstatus}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        </div>

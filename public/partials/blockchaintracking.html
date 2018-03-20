@@ -1,0 +1,138 @@
+<div class="container" ng-controller="blockchaintrackingController" style="width:100%;" ng-style="{'background-image':'url(Images/3pl.jpg)','background-size': 'cover'}" >
+    <div class="col-lg-12" id="ExpoterLabel">
+            <h2 id="ExpoterTitle" class="page-header topheadline">
+                Transit View
+            </h2>
+            <nav class="nav navbar-default" >
+                <div class="container-fluid">
+                     <ul class="nav navbar-nav"  >
+                      <li><a href="#/roles">Dashboard</a></li>
+                      <li class="active"><a href="#/supplierlanding">Transit View</a></li>
+                      <li><a href="#">Blockchain</a></li>
+                    </ul>
+                  </div>
+                </nav>
+                
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover" style="border-top: 10px solid black;border-left: 10px solid black;border-right: 5px solid black;border-bottom: 5px solid black;width:100%;">
+                <tr>
+                    <th class="col-lg-4 clinicalclass" style="border: 1px solid black;">Shippment Name</th>
+                    <th class="col-lg-4 clinicalclass" style="border: 1px solid black;">Supplier Name</th>
+                    <th class="col-lg-4 clinicalclass" style="border: 1px solid black;">Material Name</th>
+                </tr>
+                <tr>
+                    <td class="col-lg-4" style="border: 1px solid black;">456773</td>
+                    <td class="col-lg-4" style="border: 1px solid black;">ABC Chemicals</td>
+                    <td class="col-lg-4" style="border: 1px solid black;">Chemicals</td>
+                </tr>
+            </table>
+        </div>
+        <div style="border-top: 10px solid black;border-left: 10px solid black;border-right: 5px solid black;border-bottom: 5px solid black;width:100%;height:100%">
+            <div style="padding-left:20px;margin-top:10px;">
+                <lable class="col-lg-2 labelsal">Manufacturer</lable>
+                <lable class="col-lg-2 labelsal" style="margin-left:130px">Loading Port</lable>
+                <lable class="col-lg-2 labelsal" style="margin-left:130px">Unloading Port</lable>
+                <lable class="col-lg-2 labelsal" style="margin-left:130px">Customer</lable>
+                <br>
+                <br>
+            </div>
+            <div>
+                <img style="margin-left:200px;" src="/Images/truckg.png" alt="Oops" height="100" width="100" />
+                <img style="margin-left:280px" src="/Images/shipg.png" alt="Oops" height="100" width="100" />
+                <img style="margin-left:280px" src="/Images/truckg.png" alt="Oops" height="100" width="100" />
+            </div>
+    
+    
+            <div style="padding-left:20px">
+                <img src="/Images/manufacturer.png" alt="Oops" height="80" width="80" />
+                <img src="/Images/garrow.png" alt="Oops" height="30" width="180" style="margin-left:60px;" />
+                <img src="/Images/port.png" alt="Oops" height="80" width="80" style="margin-left:70px;" />
+                <img src="/Images/garrow.png" alt="Oops" height="30" width="180" style="margin-left:60px;" />
+                <img src="/Images/port.png" alt="Oops" height="80" width="80" style="margin-left:60px;" />
+                <img src="/Images/whitearrow.png" alt="Oops" height="30" width="180" style="margin-left:60px;" />
+                <img src="/Images/customer.png" alt="Oops" height="80" width="80" />
+            </div>
+    
+            <div style="border:2px dotted orange;width:98%;height:100%;margin-left:10px;margin-top:60px;">
+                <table style="width:100%">
+                    <tr>
+                        <td class="col-lg-2">
+                            <div style="margin:5px;" class="rcorners1" id="divT1">
+                                <span style="color:white;text-align:center;display:block">TX1</span>
+                                <span style="color:white;text-align:center;display:block">Handover from</span>
+                                <span style="color:white;text-align:center;display:block">Manufacturer to</span>
+                                <span style="color:white;text-align:center;display:block">Haulier</span>
+                            </div>
+                        </td>
+                        <td class="col-lg-2">
+                            <div style="margin:5px;" class="rcorners1" id="divTx2">
+                                <span style="color:white;text-align:center;display:block">TX2</span>
+                                <span style="color:white;text-align:center;display:block">Handover from</span>
+                                <span style="color:white;text-align:center;display:block">Haulier to Shipping Line </span>
+                                <span style="color:white;text-align:center;display:block">at Port</span>
+                            </div>
+                        </td>
+                        <td class="col-lg-2">
+                            <div style="margin:5px;" class="rcorners1" id="divTx3">
+                                <span style="color:white;text-align:center;display:block">TX3</span>
+                                <span style="color:white;text-align:center;display:block">Handover from</span>
+                                <span style="color:white;text-align:center;display:block">Shipping Line at Port </span>
+                                <span style="color:white;text-align:center;display:block">to Vessel</span>
+                            </div>
+                        </td>
+                        <td class="col-lg-2">
+                            <div style="margin:5px;" class="rcorners1" style="padding:0px;" id="divTx4">
+                                <span style="color:white;text-align:center;display:block">TX4</span>
+                                <span style="color:white;text-align:center;display:block">Handover from</span>
+                                <span style="color:white;text-align:center;display:block">Vessel to Shipping  </span>
+                                <span style="color:white;text-align:center;display:block"> at Port</span>
+                            </div>
+                        </td>
+                        <td class="col-lg-2">
+                            <div style="margin:5px;background:rgb(117, 116, 115);" class="rcorners1" id="divTx5">
+                                <span style="color:white;text-align:center;display:block">TX5</span>
+                                <span style="color:white;text-align:center;display:block">Handover from</span>
+                                <span style="color:white;text-align:center;display:block">Shipping Line at </span>
+                                <span style="color:white;text-align:center;display:block">Port to Haulier</span>
+                            </div>
+                        </td>
+                        <td class="col-lg-2">
+                            <div style="margin:5px;background:rgb(117, 116, 115);" class="rcorners1" id="divTx6">
+                                <span style="color:white;text-align:center;display:block">TX6</span>
+                                <span style="color:white;text-align:center;display:block">Handover from</span>
+                                <span style="color:white;text-align:center;display:block">Haulier to </span>
+                                <span style="color:white;text-align:center;display:block">Customer</span>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>                                                                                 
+                        <td class="col-lg-2"><span style="color:white;text-align:center;display:block">0xf8bd2ae8d638d6</span>
+                            <span style="color:white;text-align:center;display:block">1626fe9820cd2c</span>
+                            <span style="color:white;text-align:center;display:block">cc9fe6a81101</span></span></td>
+                                                                                                             
+                            <td class="col-lg-2"><span style="color:white;text-align:center;display:block">0x10ae69385c79ef</span>
+                                <span style="color:white;text-align:center;display:block">3eb815ac008a701</span>
+                                <span style="color:white;text-align:center;display:block">3d6878f1d38</span></span></td>
+                                                                                                                 
+                                <td class="col-lg-2"><span style="color:white;text-align:center;display:block">0x18a8dbb6a80ae7</span>
+                                                                                                
+                                    <span style="color:white;text-align:center;display:block">acc264ef508cad</span>
+                                                                                            
+                                    <span style="color:white;text-align:center;display:block">55403d2e973e</span></span></td>
+                                                                                                                     
+                                    <td class="col-lg-2"><span style="color:white;text-align:center;display:block">0xf597e754f2dab6</span>
+                                                                                                    
+                                        <span style="color:white;text-align:center;display:block">adb6a048ade0d9</span>
+                                        <span style="color:white;text-align:center;display:block">a2c38dc237b3</span></span></td>
+                                                                                                                         
+                                        <td class="col-lg-2"></td>
+                                            <td class="col-lg-2"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>  
+</div>

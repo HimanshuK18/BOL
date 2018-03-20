@@ -1,0 +1,201 @@
+<div class="container" ng-controller="supplierController" ng-style="{'background-image':'url(Images/cus.jpg)','background-size': 'cover'}"  >
+    <div class="backgroundShipper"></div>
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titlefabrication">
+            Supplier Details</h2>
+
+              <nav class="nav navbar-default" >
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav"  >
+      <li><a href="#/supplierlanding">Dashboard</a></li>
+      <li class="active"><a href="#/supplier">New Entity</a></li>
+      <li><a href="#/transitsupplier">Transit View</a></li>
+      <li><a href="#">Analytics</a></li>
+      <li><a href="#">Alerts</a></li>
+    </ul>
+  </div>
+</nav>
+</br><br>
+    </div>
+    
+        <form name="SipmentForm">
+           <!-- <uib-tabset active="activeJustified">
+                <uib-tab index="0" heading="shipper Details">
+                    <snap style="color:white;"> -->
+                        <table class="table table-bordered table-responsive table-hover">
+                            <tr>
+                                <td class="col-lg-3">PO Number</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="customerdetails.ponumber" required name="customerdetailsponumber">
+                                </td>
+                                <td class="col-lg-3">Date</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="customerdetails.date"  required name="customerdetailsdate">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Quantity</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="customerdetails.quantity" required name="customerdetailsquantity">
+                                </td>
+                                <td class="col-lg-3">Material Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="customerdetails.material" required name="customerdetailsmaterial" />
+                                </td>
+                            </tr>
+                         <!--   <tr>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Shipper (FROM)</td>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Consignee (TO)</td>
+
+
+                            </tr> -->
+                            <tr>
+                                <td class="col-lg-3">Requested ETA</td>
+                                <td class="col-lg-3">
+                                <input type="time" class="form-control" ng-model="customerdetails.eta" required name="customerdetailseta" />
+                                </td>
+                                <td class="col-lg-3">Port of discharge</td>
+                                <td class="col-lg-3">
+                                        <input type="text" class="form-control" ng-model="customerdetails.portofdischarge" required name="customerdetailsportofdischarge" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">FCL/LCL</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="customerdetails.fcl" required name="customerdetailsfcl" />
+                                </td>
+                                <td class="col-lg-3">Type of container</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="customerdetails.containertype" required name="customerdetailscontainertype" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Size of container</td>
+                                <td class="col-lg-3">
+                                  <input type="number" class="form-control" ng-model="customerdetails.containersize" required name="customerdetailscontainersize" />
+                                </td>
+                                <td class="col-lg-3">Sales order No.</td>
+                                <td class="col-lg-3">
+                                 <input type="number" class="form-control" ng-model="customerdetails.salesorderno"  name="customerdetailssalesorderno" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Incoterm</td>
+                                <td class="col-lg-3">
+                                 <input type="text" class="form-control" ng-model="customerdetails.incoterm" required name="customerdetailsincoterm" />
+                                </td>
+                                <td class="col-lg-3">Port of loading</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.portofloading"  name="customerdetailsportofloading" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Job order number</td>
+                                <td class="col-lg-3">
+                                     <input type="number" class="form-control" ng-model="customerdetails.jobordernumber"  name="customerdetailsjobordernumber" />
+                                </td>
+                                <td class="col-lg-3">ETD</td>
+                                <td class="col-lg-3">
+                                     <input type="time" class="form-control" ng-model="customerdetails.etd"  name="customerdetailsetd" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Vessel Name</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.vesselname"  name="customerdetailsvesselname" />
+                                </td>
+                                <td class="col-lg-3">Pickup date from shipper</td>
+                                <td class="col-lg-3">
+                                     <input type="date" class="form-control" ng-model="customerdetails.pickupdate"  name="customerdetailspickupdate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Invoice date</td>
+                                <td class="col-lg-3">
+                                     <input type="date" class="form-control" ng-model="customerdetails.invoicedate"  name="customerdetailsinvoicedate" />
+                                </td>
+                                <td class="col-lg-3">Invoice number</td>
+                                <td class="col-lg-3">
+                                     <input type="number" class="form-control" ng-model="customerdetails.invoicenumber"  name="customerdetailsinvoicenumber" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Bill of lading</td>
+                                <td class="col-lg-3">
+                                     <input type="number" class="form-control" ng-model="customerdetails.bol"  name="customerdetailsbol" />
+                                </td>
+                                <td class="col-lg-3">Container number</td>
+                                <td class="col-lg-3">
+                                     <input type="number" class="form-control" ng-model="customerdetails.containerno"  name="customerdetailscontainerno" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Load port transporter</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.loadingporttransporter"  name="customerdetailsloadingporttransporter" />
+                                </td>
+                                <td class="col-lg-3">Discharge port transporter</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.dischargeporttransporter"  name="customerdetailsdischargeporttransporter" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Scheduled ETA</td>
+                                <td class="col-lg-3">
+                                     <input type="time" class="form-control" ng-model="customerdetails.scheduledeta"  name="customerdetailsscheduledeta" />
+                                </td>
+                                <td class="col-lg-3">Set temperature range</td>
+                                <td class="col-lg-3">
+                                     <input type="number" class="form-control" ng-model="customerdetails.temprange"  name="customerdetailstemprange" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Consignee address</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.consigneeaddress" required name="customerdetailsconsigneeaddress" />
+                                </td>
+                                <td class="col-lg-3">Bill to Party</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.bill" required name="customerdetailsbill" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Ship to party</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.shiptoparty" required name="customerdetailsshiptoparty" />
+                                </td>
+                                <td class="col-lg-3">Consignee contact name</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.consigneename" required name="customerdetailsconsigneename" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Consignee contact number</td>
+                                <td class="col-lg-3">
+                                     <input type="number" class="form-control" ng-model="customerdetails.consigneenum" required name="customerdetailsconsigneenum" />
+                                </td>
+                                <td class="col-lg-3">Shipper's address</td>
+                                <td class="col-lg-3">
+                                     <input type="text" class="form-control" ng-model="customerdetails.shipperaddress"  name="customerdetailsshipperaddress" />
+                                </td>
+                            </tr>
+                            
+                        </table>
+              <!--  </uib-tab>
+                
+                
+            </uib-tabset> -->
+
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-success" ng-click="SaveShipment(SipmentForm)">Create</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-danger" ng-click="deselectContract()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+    </div>
+</div>

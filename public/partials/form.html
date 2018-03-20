@@ -1,0 +1,227 @@
+<!-- Change controller name and then update in app.js -->
+<div class="container" ng-controller="3p" style="min-height: 600px;width:100%;" ng-style="{'background-image':'url(Images/3pl.jpg)','background-size': 'cover'}">
+    <div class="col-lg-12">
+        <h2 class="page-header topheadline" id="titlefabrication">
+            Consolidated Form</h2>
+       
+    </div>
+    <div id='ShipmentDetailsPlant' class="container col-lg-12">
+        <form name="SipmentForm">
+            
+                        <table class="table table-bordered table-responsive table-hover">
+                            <tr>
+                                <td class="col-lg-3">Shipment Number</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.shipmentno" required name="logisticshipmentno">
+                                </td>
+                                <td class="col-lg-3">Supplier Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.suppliername" required name="logisticssuppliername">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Supplier Address</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.supplieraddress" required name="logisticssupplieraddress">
+                                </td>
+                                <td class="col-lg-3">Consignee Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.consigneename" required  name="logisticsconsigneename" />
+                                </td>
+                            </tr>
+                           <!-- <tr>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Shipper (FROM)</td>
+                                <td class="col-lg-6" colspan="2" style="text-align:center;">Consignee (TO)</td>
+
+
+                            </tr> -->
+                            <tr>
+                                <td class="col-lg-3">Consignee Address</td>
+                                <td class="col-lg-3">
+                                   <input type="text" class="form-control" ng-model="logistics.consigneeaddress" required  name="logisticsconsigneeaddress" />
+                                </td>
+                                <td class="col-lg-3">3PL Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.logisticsname" required  name="logisticslogisticsname" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">PO Number</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.ponumber" required  name="logisticsponumber" />
+                                </td>
+                                <td class="col-lg-3">PO Date</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.podate" required  name="logisticspodate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Quantity</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.quantity" required  name="logisticsquantity" />
+                                </td>
+                                <td class="col-lg-3">Material Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.materialname" required  name="materialname" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Port of discharge</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.portofdischarge" required  name="logisticsportofdischarge" />
+                                </td>
+                                <td class="col-lg-3">FCL/LCL</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.fcl" required  name="logisticsfcl" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Type of container</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.containertype" required  name="logisticscontainertype" />
+                                </td>
+                                <td class="col-lg-3">Size of Container</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.containersize" required  name="logisticscontainersize" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Supplier sales order no.</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.salesno" required  name="logisticssalesno" />
+                                </td>
+                                <td class="col-lg-3">Incoterm</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.incoterm" required  name="logisticsincoterm" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Port of Loading</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.portofloading" required  name="logisticsportofloading" />
+                                </td>
+                                <td class="col-lg-3">Job order no.</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.jobno" required  name="logisticsjobno" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Vessel Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.vesselname" required  name="logisticsvesselname" />
+                                </td>
+                                <td class="col-lg-3">Pickup date from shipper</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.pickupdateshipper" required  name="logisticspickupdateshipper" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Invoice Date</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.invoicedate" required  name="logisticsinvoicedate" />
+                                </td>
+                                <td class="col-lg-3">Invoice Number</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.invoicenumber" required  name="logisticsinvoicenumber" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Vessel Name</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.vesselname" required  name="logisticsvesselname" />
+                                </td>
+                                <td class="col-lg-3">Pickup date from shipper</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.pickupdateshipper" required  name="logisticspickupdateshipper" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Bill of lading</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.bol" required  name="logisticsbol" />
+                                </td>
+                                <td class="col-lg-3">Container Number</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.containerno" required  name="logisticscontainerno" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Load Port Transporter</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.loadporttransporter" required  name="logisticsloadporttransporter" />
+                                </td>
+                                <td class="col-lg-3">Discharge Port Transporter</td>
+                                <td class="col-lg-3">
+                                    <input type="text" class="form-control" ng-model="logistics.dischargeporttransporter" required  name="logisticsdischargeporttransporter" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Requested ETA</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.requestedeta" required  name="logisticsrequestedeta" />
+                                </td>
+                                <td class="col-lg-3">Requested ETD</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.requestedetd" required  name="logisticsrequestedetd" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Actual ETD</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.actualetd" required  name="logisticsactualetd" />
+                                </td>
+                                <td class="col-lg-3">Scheduled Pickup Date</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.scheduledpickupdate" required  name="logisticsscheduledpickupdate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Actual Pickup Date</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.actualpickupdate" required  name="logisticsactualpickupdate" />
+                                </td>
+                                <td class="col-lg-3">Actual ETA</td>
+                                <td class="col-lg-3">
+                                    <input type="date" class="form-control" ng-model="logistics.actualeta" required  name="logisticsactualeta" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Ordered Quantity</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.orderedquantity" required  name="logisticsorderedquantity" />
+                                </td>
+                                <td class="col-lg-3">Recieved Quantity</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.receivedquantity" required  name="logisticsreceivedquantity" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-3">Minimum Temperature</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.mintemp" required  name="logisticsmintemp" />
+                                </td>
+                                <td class="col-lg-3">Maximum Temperature</td>
+                                <td class="col-lg-3">
+                                    <input type="number" class="form-control" ng-model="logistics.maxtemp" required  name="logisticsmaxtemp" />
+                                </td>
+                            </tr>
+
+                    
+                        </table>
+               <!-- </uib-tab>
+                
+                
+            </uib-tabset> -->
+
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-success" ng-click="SaveShipment(SipmentForm)">Create</button>
+                    </td>
+                    <td style="text-align: center" class="col-lg-4">
+                        <button class="btn btn-danger" ng-click="deselectContract()" formnovalidate>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+    </div>
+</div>
