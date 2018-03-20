@@ -48,4 +48,10 @@ angular.module('LOCUseCase')
             $rootScope.ShipmentID = Shipmentid;
             $location.path('/shippingcompanysend/');
         }
+        var socket = io();
+        socket.on('rfid value', function (msg) {
+        console.log(msg.num);
+        console.log(msg.type);
+        $scope.ShipmentDetails.consignmentData=[{type:type,rfid:msg.num}];
+        });
     }]);

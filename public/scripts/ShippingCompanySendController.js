@@ -91,6 +91,21 @@ angular.module('LOCUseCase')
                 }
             }
         };
+        var socket = io();
+        socket.on('rfid value', function (msg) {
+        console.log(msg.num);
+        console.log(msg.type);
+        $scope.$apply(function() {var index = $scope.ConsignmentData.length -1;
+            $scope.ConsignmentData[index].rfid = msg.num;
+           $scope.ConsignmentData[index].type = msg.type;
+            });
+        });
+        socket.on('rfid container', function (msg) {
+        console.log(msg.num);
+        console.log(msg.type);
+        $scope.$apply(function() {$scope.shipmentdetailss.containerfid=msg.num;
+            });
+        });
     }]);
 
 

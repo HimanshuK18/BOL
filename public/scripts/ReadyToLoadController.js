@@ -68,4 +68,12 @@ angular.module('LOCUseCase')
                     }, function (response) { return "Something went wrong." });  
             }
         };
+        var socket = io();
+         socket.on('rfid container', function (msg) {
+        console.log(msg.num);
+        console.log(msg.type);
+        $scope.$apply(function() {$scope.loadshipmentdetails.containerefidload=msg.num;
+            });
+        });
+        
     }]);
